@@ -1,0 +1,21 @@
+.sky,
+.bats,
+.fx {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.sky {
+  z-index: 0;
+}
+
+.bats {
+  z-index: 5;
+}
+
+.fx {
+  z-index: 50;
+}

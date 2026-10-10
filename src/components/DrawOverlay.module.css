@@ -1,0 +1,308 @@
+.overlay {
+  --orb: min(38vh, 30vw);
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 55%, oklch(30% 0.12 300 / 0.6), oklch(8% 0.03 290 / 0.92) 70%);
+  backdrop-filter: blur(5px);
+  animation: overlayIn 0.4s ease both;
+  transition: opacity 0.5s ease 0.15s, backdrop-filter 0.5s ease;
+}
+
+.revealing {
+  cursor: pointer;
+}
+
+.flying {
+  background: transparent;
+  backdrop-filter: none;
+  transition: background 0.4s ease;
+}
+
+/* ---------- Caption ---------- */
+
+.caption {
+  position: absolute;
+  top: 7vh;
+  inset-inline: 0;
+  text-align: center;
+  font-family: var(--font-spooky);
+  font-size: 8vh;
+  letter-spacing: 0.04em;
+  color: var(--c-slime);
+  text-shadow: 0 0 3vh oklch(85% 0.22 135 / 0.7), 0 0.6vh 0 oklch(20% 0.08 140);
+  transition: opacity 0.3s ease;
+
+  .flying & {
+    opacity: 0;
+  }
+}
+
+.stirring {
+  display: inline-block;
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+.phrase {
+  display: inline-block;
+  color: var(--c-pumpkin);
+  text-shadow: 0 0 3vh oklch(75% 0.19 55 / 0.8), 0 0.6vh 0 oklch(30% 0.1 40);
+  animation: phraseIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ---------- Orb ---------- */
+
+.anchor {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: 0;
+  height: 0;
+}
+
+.orb {
+  position: absolute;
+  left: calc(var(--orb) / -2);
+  top: calc(var(--orb) / -2);
+  width: var(--orb);
+  height: var(--orb);
+  transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  .shuffling & {
+    transform: translateY(24vh) scale(0.5);
+  }
+
+  .revealing & {
+    transform: none;
+  }
+
+  .flying & {
+    transition: transform 0.75s cubic-bezier(0.55, -0.35, 0.45, 1);
+  }
+}
+
+.orbInner {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, oklch(100% 0 0 / 0.85) 0 6%, transparent 18%),
+    radial-gradient(circle at 50% 45%, oklch(94% 0.12 85), oklch(77% 0.19 58) 55%, oklch(50% 0.18 40));
+  box-shadow:
+    0 0 8vh oklch(78% 0.19 60 / 0.9),
+    0 0 16vh oklch(60% 0.22 305 / 0.6),
+    inset 0 -3vh 5vh oklch(40% 0.15 40 / 0.7);
+
+  .shuffling & {
+    animation: shake 0.18s linear infinite;
+    background:
+      radial-gradient(circle at 32% 28%, oklch(100% 0 0 / 0.7) 0 6%, transparent 18%),
+      radial-gradient(circle at 50% 45%, oklch(92% 0.2 130), oklch(65% 0.22 140) 60%, oklch(35% 0.12 145));
+    box-shadow: 0 0 8vh oklch(85% 0.22 135 / 0.9), inset 0 -3vh 5vh oklch(30% 0.1 145 / 0.7);
+  }
+
+  .revealing & {
+    animation: orbBob 2s ease-in-out 0.6s infinite;
+  }
+}
+
+.orbNumber {
+  font-size: calc(var(--orb) * 0.52);
+  font-weight: 700;
+  line-height: 1;
+  color: oklch(22% 0.07 40);
+  text-shadow: 0 0.8vh 0 oklch(95% 0.12 85 / 0.7);
+
+  .shuffling & {
+    color: oklch(25% 0.08 145);
+    filter: blur(1.5px);
+  }
+
+  .revealing & {
+    animation: numberPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  }
+}
+
+.rays {
+  position: absolute;
+  inset: calc(var(--orb) * -0.55);
+  border-radius: 50%;
+  background: repeating-conic-gradient(oklch(85% 0.17 75 / 0.35) 0 8deg, transparent 8deg 22deg);
+  mask: radial-gradient(circle, black 25%, transparent 70%);
+  opacity: 0;
+  scale: 0.3;
+  transition: opacity 0.4s ease, scale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: spin 12s linear infinite;
+
+  .revealing & {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.words {
+  position: absolute;
+  top: calc(47% + var(--orb) / 2 + 3vh);
+  inset-inline: 0;
+  text-align: center;
+  font-size: 6vh;
+  font-weight: 700;
+  color: var(--c-bone);
+  text-shadow: 0 0.5vh 0 oklch(20% 0.08 300);
+
+  & span {
+    display: inline-block;
+    animation: phraseIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
+  }
+
+  .flying & {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+}
+
+.hint {
+  position: absolute;
+  bottom: 3vh;
+  inset-inline: 0;
+  text-align: center;
+  font-size: 2.2vh;
+  font-weight: 600;
+  color: var(--c-purple-light);
+  animation: hintBlink 1.6s ease-in-out 1s infinite both;
+}
+
+/* ---------- Cauldron ---------- */
+
+.cauldronWrap {
+  position: absolute;
+  left: 50%;
+  bottom: -4vh;
+  width: 52vh;
+  translate: -50% 0;
+  transition: translate 0.6s cubic-bezier(0.55, -0.4, 0.8, 0.5), opacity 0.4s ease;
+  animation: cauldronIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  .revealing & {
+    translate: -50% 18vh;
+  }
+
+  .flying & {
+    translate: -50% 60vh;
+    opacity: 0;
+  }
+}
+
+.cauldron {
+  display: block;
+  width: 100%;
+  filter: drop-shadow(0 0 4vh oklch(80% 0.22 135 / 0.5));
+
+  .shuffling & {
+    animation: rumble 0.25s ease-in-out infinite;
+  }
+}
+
+.bubble {
+  position: absolute;
+  bottom: 62%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, oklch(98% 0.1 130), oklch(80% 0.24 135));
+  box-shadow: 0 0 1.5vh oklch(85% 0.22 135 / 0.8);
+  animation: rise 2.6s ease-in infinite;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes cauldronIn {
+  from {
+    translate: -50% 60vh;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  25% {
+    transform: translate(-0.8vh, 0.4vh) rotate(-4deg);
+  }
+  50% {
+    transform: translate(0.6vh, -0.6vh) rotate(3deg);
+  }
+  75% {
+    transform: translate(0.8vh, 0.5vh) rotate(-2deg);
+  }
+}
+
+@keyframes rumble {
+  50% {
+    transform: translateY(-0.6vh) rotate(1deg);
+  }
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(0.4);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-55vh) translateX(3vh) scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes numberPop {
+  from {
+    transform: scale(0) rotate(-30deg);
+  }
+}
+
+@keyframes orbBob {
+  50% {
+    transform: translateY(-1.5vh) rotate(3deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes phraseIn {
+  from {
+    opacity: 0;
+    transform: scale(0.3) translateY(4vh);
+  }
+}
+
+@keyframes wave {
+  50% {
+    transform: translateY(-1vh) rotate(-2deg);
+  }
+}
+
+@keyframes hintBlink {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,254 @@
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background: oklch(16% 0.06 300 / 0.92);
+  border-bottom: 2px solid oklch(45% 0.13 305 / 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.back {
+  color: var(--c-purple-light);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--c-slime);
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+
+  & strong {
+    font-family: var(--font-spooky);
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--c-pumpkin);
+  }
+
+  & span {
+    color: var(--c-purple-light);
+  }
+}
+
+.print {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: oklch(22% 0.07 40);
+  background: linear-gradient(180deg, oklch(85% 0.15 75), oklch(70% 0.19 52));
+  box-shadow: 0 4px 0 oklch(45% 0.17 42);
+  cursor: pointer;
+  transition: scale 0.15s ease, filter 0.15s ease;
+
+  &:hover {
+    scale: 1.05;
+    filter: brightness(1.1);
+  }
+}
+
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.level {
+  --hue: 140;
+  border: 2px solid oklch(70% 0.17 var(--hue));
+  border-radius: 20px;
+  overflow: hidden;
+  background: oklch(20% 0.06 295 / 0.85);
+  break-inside: avoid;
+}
+
+.levelHeading {
+  margin: 0;
+  padding: 12px 20px;
+  font-family: var(--font-spooky);
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: oklch(20% 0.06 var(--hue));
+  background: linear-gradient(180deg, oklch(88% 0.14 var(--hue)), oklch(68% 0.18 var(--hue)));
+}
+
+.levelNumber {
+  margin-right: 8px;
+  font-family: var(--font-fun);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: challenge;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  column-gap: 20px;
+  row-gap: 2px;
+  padding: 14px 20px;
+  counter-increment: challenge;
+
+  & + .item {
+    border-top: 1px solid oklch(45% 0.1 300 / 0.5);
+  }
+
+  &::before {
+    content: counter(challenge);
+    grid-row: span 2;
+    font-family: var(--font-spooky);
+    font-size: 30px;
+    line-height: 1;
+    color: oklch(75% 0.17 var(--hue));
+  }
+}
+
+.title {
+  grid-column: 2 / span 2;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-purple-light);
+}
+
+.prompt,
+.answer {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+  white-space: pre-line;
+}
+
+.answer {
+  color: var(--c-slime);
+}
+
+.answerLabel {
+  color: var(--c-candle);
+}
+
+/* Phones: the host may check answers on their own device */
+@media (max-width: 640px) {
+  .toolbar {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 10px 16px;
+  }
+
+  .info {
+    order: -1;
+    flex-basis: 100%;
+
+    & strong {
+      font-size: 22px;
+    }
+
+    & span {
+      font-size: 14px;
+    }
+  }
+
+  .back {
+    flex: 1;
+  }
+
+  .print {
+    padding: 8px 16px;
+    font-size: 15px;
+  }
+
+  .levels {
+    gap: 20px;
+    padding: 16px 12px 40px;
+  }
+
+  .level {
+    border-radius: 16px;
+  }
+
+  .levelHeading {
+    padding: 10px 16px;
+    font-size: 24px;
+  }
+
+  .levelNumber {
+    font-size: 15px;
+  }
+
+  /* number on the left, then title, prompt and answer stacked */
+  .item {
+    grid-template-columns: 28px 1fr;
+    grid-template-rows: none;
+    column-gap: 12px;
+    row-gap: 6px;
+    padding: 12px 16px;
+
+    &::before {
+      grid-row: span 3;
+      font-size: 24px;
+    }
+  }
+
+  .title {
+    grid-column: 2;
+  }
+
+  .prompt,
+  .answer {
+    font-size: 17px;
+  }
+}
+
+@media print {
+  .toolbar {
+    display: none;
+  }
+
+  .levels {
+    padding: 0;
+    gap: 16px;
+  }
+
+  .level {
+    background: #fff;
+    color: #222;
+  }
+
+  .title {
+    color: #666;
+  }
+
+  .answer {
+    color: #1d6b1a;
+  }
+
+  .answerLabel {
+    color: #222;
+  }
+}

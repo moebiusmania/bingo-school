@@ -1,0 +1,17 @@
+/*
+ * The layout always fits the viewport; below roughly a 13" laptop viewport
+ * it stops shrinking and the page scrolls instead. Children size themselves
+ * with container units (cqh/cqw) relative to this element.
+ */
+.app {
+  container-type: size;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(340px, 25vw, 520px);
+  grid-template-rows: minmax(0, 1fr);
+  gap: max(2vw, 23px);
+  height: max(100dvh, 680px);
+  min-width: 1150px;
+  padding: max(3vh, 20px) max(2vw, 23px);
+}

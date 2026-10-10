@@ -1,0 +1,37 @@
+{
+  "1": [
+    {"title": "Colors", "prompt": "What color is a pumpkin?", "answer": "Orange"},
+    {"title": "Spell it!", "prompt": "Spell the word:\nCAT", "answer": "C - A - T"},
+    {"title": "Animals", "prompt": "Which animal says \"Meow\"?", "answer": "A cat"},
+    {"title": "Numbers", "prompt": "Count from 1 to 10 in English!", "answer": "One, two, three, four, five, six, seven, eight, nine, ten"},
+    {"title": "Colors", "prompt": "Say 3 colors in English.", "answer": "For example: red, blue, green"}
+  ],
+  "2": [
+    {"title": "Spell it!", "prompt": "Spell the word:\nGHOST", "answer": "G - H - O - S - T"},
+    {"title": "Opposites", "prompt": "What is the opposite of \"big\"?", "answer": "Small"},
+    {"title": "One or more?", "prompt": "One bat, two ...?", "answer": "Bats"},
+    {"title": "Fill the gap", "prompt": "I ___ a witch.\n(am / is / are)", "answer": "I am a witch."},
+    {"title": "Days", "prompt": "Say 4 days of the week.", "answer": "For example: Monday, Tuesday, Wednesday, Thursday"}
+  ],
+  "3": [
+    {"title": "Spell it!", "prompt": "Spell the word:\nWITCH", "answer": "W - I - T - C - H"},
+    {"title": "Opposites", "prompt": "What is the opposite of \"hot\"?", "answer": "Cold"},
+    {"title": "One or more?", "prompt": "One spider, two ...?", "answer": "Spiders"},
+    {"title": "Fill the gap", "prompt": "She ___ a ghost.\n(am / is / are)", "answer": "She is a ghost."},
+    {"title": "Halloween words", "prompt": "Say 3 Halloween words in English.", "answer": "For example: pumpkin, ghost, bat"}
+  ],
+  "4": [
+    {"title": "Spell it!", "prompt": "Spell the word:\nPUMPKIN", "answer": "P - U - M - P - K - I - N"},
+    {"title": "One or more?", "prompt": "One witch, two ...?", "answer": "Witches"},
+    {"title": "Fill the gap", "prompt": "The bats ___ black.\n(am / is / are)", "answer": "The bats are black."},
+    {"title": "Word order", "prompt": "Put the words in order:\nis / The / scary / ghost", "answer": "The ghost is scary."},
+    {"title": "Months", "prompt": "In which month is Halloween?", "answer": "October"}
+  ],
+  "5": [
+    {"title": "Spell it!", "prompt": "Spell the word:\nMONSTER", "answer": "M - O - N - S - T - E - R"},
+    {"title": "Yesterday...", "prompt": "Today I play.\nYesterday I ...?", "answer": "Played"},
+    {"title": "Find the mistake", "prompt": "He have a black cat.", "answer": "He has a black cat."},
+    {"title": "Bigger!", "prompt": "A pumpkin is ___ than an apple.\n(big)", "answer": "Bigger"},
+    {"title": "Finish the sentence", "prompt": "On Halloween I like ...", "answer": "For example: On Halloween I like eating candy."}
+  ]
+}

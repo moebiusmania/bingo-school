@@ -1,0 +1,25 @@
+/* Page-level rules for the printable cards page */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+html,
+body,
+#app {
+  height: auto;
+  overflow: visible;
+}
+
+body {
+  user-select: text;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff;
+  }
+}

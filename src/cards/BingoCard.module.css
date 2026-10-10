@@ -1,0 +1,159 @@
+.card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 3mm;
+  height: 100%;
+  padding: 3.5mm 5mm 4.5mm;
+  overflow: hidden;
+  border-radius: 5mm;
+  border: 0.8mm solid oklch(45% 0.13 305);
+  color: var(--c-bone);
+  background:
+    radial-gradient(circle at 88% 18%, oklch(95% 0.06 95) 0 4mm, oklch(90% 0.1 90 / 0.35) 4.5mm, transparent 12mm),
+    radial-gradient(circle at 12% 30%, #fff8 0 0.3mm, transparent 0.5mm),
+    radial-gradient(circle at 37% 12%, #fff8 0 0.3mm, transparent 0.5mm),
+    radial-gradient(circle at 63% 8%, #fff8 0 0.25mm, transparent 0.45mm),
+    radial-gradient(circle at 76% 34%, #fff8 0 0.3mm, transparent 0.5mm),
+    radial-gradient(ellipse at 50% 0%, oklch(36% 0.13 305), transparent 70%),
+    linear-gradient(170deg, oklch(24% 0.08 300), oklch(14% 0.05 290));
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.web {
+  position: absolute;
+  bottom: 0;
+  width: 18mm;
+  height: 18mm;
+  opacity: 0.8;
+}
+
+.webLeft {
+  left: 0;
+  scale: 1 -1;
+}
+
+.webRight {
+  right: 0;
+  scale: -1 -1;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 5mm;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+
+.ghost {
+  width: 11mm;
+  rotate: -8deg;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-spooky);
+  font-size: 8mm;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+
+  & span:first-child {
+    color: var(--c-slime);
+  }
+
+  & span:last-child {
+    color: var(--c-pumpkin);
+  }
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+}
+
+.nameLabel {
+  font-size: 5mm;
+  font-weight: 700;
+  color: var(--c-candle);
+}
+
+.nameBox {
+  flex: 1;
+  height: 13mm;
+  border-radius: 3mm;
+  background: oklch(97% 0.015 90);
+  border: 0.7mm solid var(--c-pumpkin);
+  box-shadow: inset 0 0.8mm 0 oklch(80% 0.03 90);
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: 16mm;
+  height: 16mm;
+  margin-right: 8mm;
+  border-radius: 50%;
+  font-size: 6.5mm;
+  font-weight: 700;
+  line-height: 1;
+  color: oklch(25% 0.07 40);
+  background: radial-gradient(circle at 35% 30%, oklch(92% 0.12 80), oklch(74% 0.19 56) 60%, oklch(56% 0.18 42));
+
+  & small {
+    font-size: 2.3mm;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+/* ---------- Number grid ---------- */
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 1.8mm;
+}
+
+.cell,
+.empty {
+  display: grid;
+  place-items: center;
+  border-radius: 2.5mm;
+}
+
+/* Numbers sit on light tiles so children can mark them with a pen */
+.cell {
+  font-size: 9mm;
+  font-weight: 700;
+  color: oklch(25% 0.1 300);
+  background: radial-gradient(ellipse at 50% 30%, #fff, oklch(93% 0.03 85));
+  border: 0.6mm solid oklch(75% 0.17 58);
+  box-shadow: inset 0 -0.8mm 0 oklch(85% 0.05 80);
+}
+
+.empty {
+  background: linear-gradient(180deg, oklch(32% 0.09 300), oklch(23% 0.07 295));
+  border: 0.4mm solid oklch(44% 0.11 300 / 0.85);
+}
+
+.deco {
+  width: 62%;
+  max-height: 72%;
+  opacity: 0.75;
+}

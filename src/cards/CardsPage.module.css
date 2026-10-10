@@ -1,0 +1,133 @@
+/* ---------- Screen toolbar (hidden when printing) ---------- */
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background: oklch(16% 0.06 300 / 0.92);
+  border-bottom: 2px solid oklch(45% 0.13 305 / 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.back {
+  color: var(--c-purple-light);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--c-slime);
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+
+  & strong {
+    font-family: var(--font-spooky);
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--c-pumpkin);
+  }
+
+  & small {
+    color: var(--c-purple-light);
+  }
+}
+
+.primary,
+.secondary {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: scale 0.15s ease, filter 0.15s ease;
+
+  &:hover {
+    scale: 1.05;
+    filter: brightness(1.1);
+  }
+}
+
+.primary {
+  font-size: 18px;
+  color: oklch(22% 0.07 40);
+  background: linear-gradient(180deg, oklch(85% 0.15 75), oklch(70% 0.19 52));
+  box-shadow: 0 4px 0 oklch(45% 0.17 42);
+}
+
+.secondary {
+  font-size: 15px;
+  color: var(--c-bone);
+  background: oklch(45% 0.15 300);
+  box-shadow: 0 4px 0 oklch(28% 0.1 300);
+}
+
+/* ---------- A4 sheets ---------- */
+
+.sheets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12mm;
+  padding: 12mm 0 24mm;
+}
+
+.sheet {
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 40px oklch(0% 0 0 / 0.6);
+}
+
+/* Each card occupies exactly one third of the page height */
+.slot {
+  position: relative;
+  height: 99mm;
+  padding: 4.5mm 6mm;
+
+  & + .slot {
+    border-top: 0.3mm dashed #9a9a9a;
+  }
+}
+
+.scissors {
+  position: absolute;
+  top: 0;
+  left: 8mm;
+  width: 5mm;
+  translate: 0 -50%;
+  rotate: -90deg;
+  padding: 0 0.6mm;
+  color: #777;
+  background: #fff;
+}
+
+@media print {
+  .toolbar {
+    display: none;
+  }
+
+  .sheets {
+    display: block;
+    padding: 0;
+  }
+
+  .sheet {
+    box-shadow: none;
+    break-after: page;
+
+    &:last-child {
+      break-after: auto;
+    }
+  }
+}
