@@ -26,6 +26,8 @@ There are no tests and no lint task. Verify changes with `deno task check` and `
 - `cards/index.html` → `src/cards/main.tsx`: printable player cards.
 - `answers/index.html` → `src/answers/main.tsx`: host-only list of every challenge in `challenges.json` with its answer, printable.
 - The site is published on GitHub Pages under `/bingo-school/`. `vite.config.ts` sets that as `base` (dev and preview too, so the local URL is `http://localhost:5173/bingo-school/`). In-app links must use `import.meta.env.BASE_URL`, never a hard-coded `/`.
+- Each page's `<head>` has SEO and social share tags (Open Graph + Twitter) with absolute URLs to `https://moebiusmania.github.io/bingo-school/`. They all share `public/og-image.jpg` (1200×630). `/answers` is `noindex`.
+- `.github/workflows/deploy.yml` type-checks, builds and deploys `dist/` to GitHub Pages on every push to `main` (or by hand from the Actions tab).
 - A small plugin in `vite.config.ts` rewrites `/bingo-school/cards` and `/bingo-school/answers` to add the trailing slash in both dev and preview. Every page is listed in `build.rollupOptions.input`.
 - `vite.config.ts` is type-checked by Deno without Node typings, so don't reference Node types like `IncomingMessage`. Use structural types instead.
 
