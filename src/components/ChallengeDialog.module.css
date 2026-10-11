@@ -124,7 +124,9 @@
   margin-top: -1vh;
   font-family: var(--font-spooky);
   font-size: 4.5vh;
+  line-height: 1.1;
   letter-spacing: 0.05em;
+  text-align: center;
   color: var(--c-slime);
   text-shadow: 0 0 2vh oklch(88% 0.23 133 / 0.8);
   animation: bingoWobble 1.2s ease-in-out infinite;

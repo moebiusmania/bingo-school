@@ -4,11 +4,11 @@ export const CHALLENGE_LEVELS = [1, 2, 3, 4, 5] as const;
 export type ChallengeLevel = (typeof CHALLENGE_LEVELS)[number];
 
 export const LEVEL_NAMES: Record<ChallengeLevel, string> = {
-  1: 'Double Boo',
-  2: 'Triple Trick',
-  3: 'Four Frights',
-  4: 'Spooky Line',
-  5: 'Bingo!',
+  1: 'Boo Boo!',
+  2: 'Three Bats!',
+  3: 'Four Cats!',
+  4: 'Five Pumpkins!',
+  5: 'Trick or Treat!',
 };
 
 /** Same colors as the level buttons in ChallengeDialog.module.css. */
