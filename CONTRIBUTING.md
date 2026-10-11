@@ -11,20 +11,21 @@ Thanks for helping make classroom bingo spookier! This guide explains how to set
 
 ## Setup
 
-You need [Deno 2](https://docs.deno.com/runtime/getting_started/installation/). There is no `npm install` step: Deno installs the dependencies listed in `deno.json` on the first run.
+You need [Bun](https://bun.sh/docs/installation). Run `bun install` once to install the dependencies listed in `package.json`.
 
 ```sh
 git clone git@github.com:<your-user>/bingo-school.git
 cd bingo-school
-deno task dev   # http://localhost:5173/bingo-school/
+bun install
+bun run dev   # http://localhost:5173/bingo-school/
 ```
 
 ## Before you open a pull request
 
 The project has no automated tests, so please check your changes by hand:
 
-1. `deno task check` passes.
-2. `deno task build` passes.
+1. `bun run check` passes.
+2. `bun run build` passes.
 3. You tried your change in a browser. For the board, use a desktop window at least 1150 px wide. For the answers page, also try a phone-sized window.
 
 The deploy workflow runs the same check and build, so a pull request that fails them can't be deployed.
@@ -66,6 +67,6 @@ Guidelines:
 1. Fork the repository and create a branch from `main`.
 2. Keep each pull request focused on one change.
 3. Describe what you changed and why. For visual changes, add a screenshot.
-4. Make sure `deno task check` and `deno task build` pass.
+4. Make sure `bun run check` and `bun run build` pass.
 
 By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).

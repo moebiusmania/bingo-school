@@ -6,18 +6,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 "Spooky Bingo": a Halloween-themed interactive bingo (tombola) board for children aged 7–10, operated by a teacher on a widescreen desktop monitor. Mobile layouts are out of scope, except for the host-only `/answers` page, which must work on a phone. All UI text and code are in English.
 
-Stack: Deno + Vite + Preact (v11) + TypeScript + CSS Modules. npm packages come in through `deno.json` `imports` with `nodeModulesDir: "auto"`. There is no `package.json`.
+Stack: Bun + Vite + Preact (v11) + TypeScript + CSS Modules. Dependencies live in `package.json` (lockfile `bun.lock`). Scripts run Vite and `tsc` on the Bun runtime via `bun --bun`.
 
 ## Commands
 
 ```sh
-deno task dev      # Vite dev server, exposed on the LAN (--host) for testing from other devices
-deno task build    # production build to dist/ (three pages: board, cards, answers)
-deno task preview  # serve the built dist/
-deno task check    # type-check src/ and vite.config.ts
+bun install        # install dependencies
+bun run dev        # Vite dev server, exposed on the LAN (--host) for testing from other devices
+bun run build      # production build to dist/ (three pages: board, cards, answers)
+bun run preview    # serve the built dist/
+bun run check      # type-check src/ and vite.config.ts (tsc --noEmit, see tsconfig.json)
 ```
 
-There are no tests and no lint task. Verify changes with `deno task check` and `deno task build`. Do not install headless browsers to check the UI; the user tests in their own browser.
+There are no tests and no lint task. Verify changes with `bun run check` and `bun run build`. Do not install headless browsers to check the UI; the user tests in their own browser.
 
 ## Architecture
 
@@ -29,7 +30,7 @@ There are no tests and no lint task. Verify changes with `deno task check` and `
 - Each page's `<head>` has SEO and social share tags (Open Graph + Twitter) with absolute URLs to `https://moebiusmania.github.io/bingo-school/`. They all share `public/og-image.jpg` (1200×630). `/answers` is `noindex`.
 - `.github/workflows/deploy.yml` type-checks, builds and deploys `dist/` to GitHub Pages on every push to `main` (or by hand from the Actions tab).
 - A small plugin in `vite.config.ts` rewrites `/bingo-school/cards` and `/bingo-school/answers` to add the trailing slash in both dev and preview. Every page is listed in `build.rollupOptions.input`.
-- `vite.config.ts` is type-checked by Deno without Node typings, so don't reference Node types like `IncomingMessage`. Use structural types instead.
+- `vite.config.ts` is type-checked without Node typings (`tsconfig.json` only loads `vite/client`), so don't reference Node types like `IncomingMessage`. Use structural types instead.
 
 ### Board draw flow (`src/App.tsx`)
 A phase state machine drives each draw: `idle → shuffling → revealing → flying → idle`. The timings are the `*_MS` constants.

@@ -21,16 +21,16 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-          cache: true
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
 
       - name: Type-check
-        run: deno task check
+        run: bun run check
 
       - name: Build
-        run: deno task build
+        run: bun run build
 
       - uses: actions/configure-pages@v6
 

@@ -30,7 +30,7 @@ Spooky Bingo is built for one teacher running one game on one desktop screen. Ph
 
 ## Stack
 
-- [Deno](https://deno.com/) 2 as the runtime and task runner. npm packages come in through `deno.json`, and there is no `package.json`.
+- [Bun](https://bun.sh/) as the runtime, package manager and task runner. Dependencies are listed in `package.json`.
 - [Vite](https://vite.dev/) for the multi-page build (board, cards and answers).
 - [Preact](https://preactjs.com/) 11 and TypeScript.
 - CSS Modules. The layout uses container query units, so the board scales to fill the screen.
@@ -40,22 +40,24 @@ Spooky Bingo is built for one teacher running one game on one desktop screen. Ph
 
 ## Run it locally
 
-You need [Deno 2](https://docs.deno.com/runtime/getting_started/installation/). Deno installs the dependencies on the first run.
+You need [Bun](https://bun.sh/docs/installation).
 
 ```sh
 git clone git@github.com:moebiusmania/bingo-school.git
 cd bingo-school
-deno task dev
+bun install
+bun run dev
 ```
 
 Then open <http://localhost:5173/bingo-school/>. The dev server is also reachable from other devices on your network, which is handy for checking the answers page on a phone.
 
 | Command | What it does |
 | --- | --- |
-| `deno task dev` | Start the dev server with hot reload |
-| `deno task check` | Type-check the project |
-| `deno task build` | Build the static site into `dist/` |
-| `deno task preview` | Serve the built `dist/` locally |
+| `bun install` | Install the dependencies |
+| `bun run dev` | Start the dev server with hot reload |
+| `bun run check` | Type-check the project |
+| `bun run build` | Build the static site into `dist/` |
+| `bun run preview` | Serve the built `dist/` locally |
 
 ### Changing the challenges
 
