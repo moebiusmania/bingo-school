@@ -61,7 +61,11 @@ Then open <http://localhost:5173/bingo-school/>. The dev server is also reachabl
 
 ### Changing the challenges
 
-All challenge content lives in [`src/game/challenges.json`](src/game/challenges.json). There are 5 levels with 5 challenges each, and every challenge has a `title`, a `prompt` and an `answer`. In a prompt, `\n` starts a new line. The board and the answers page both read this file, so there is nothing else to update.
+All challenge content lives in [`src/themes/halloween/challenges.json`](src/themes/halloween/challenges.json). There are 5 levels with 5 challenges each, and every challenge has a `title`, a `prompt` and an `answer`. In a prompt, `\n` starts a new line. The board and the answers page both read this file, so there is nothing else to update.
+
+### Themes
+
+Everything Halloween about the game (colors, fonts, artwork, sounds, texts, challenges and page titles) lives in [`src/themes/halloween/`](src/themes/halloween/). The game itself doesn't change between themes. To make a new one, copy that folder, register its `meta.json` in [`src/themes/meta.ts`](src/themes/meta.ts), and build with `THEME=<folder> bun run build` (or `bun run dev`). [`src/themes/types.ts`](src/themes/types.ts) documents every slot a theme fills.
 
 ### Deployment
 

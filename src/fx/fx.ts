@@ -1,12 +1,16 @@
 /** Tiny event bus so any component can fire particle bursts on the FX canvas. */
 
-export type ParticleShape = 'star' | 'candy' | 'dot' | 'pumpkin';
+/**
+ * Draws one particle of roughly `size` radius, centred on the origin (already
+ * translated and rotated). `ctx.fillStyle` is set to `color` beforehand.
+ */
+export type ParticleShape = (ctx: CanvasRenderingContext2D, size: number, color: string) => void;
 
 export interface BurstOptions {
   count?: number;
   power?: number;
-  colors?: string[];
-  shapes?: ParticleShape[];
+  colors?: readonly string[];
+  shapes?: readonly ParticleShape[];
   size?: number;
 }
 

@@ -4,7 +4,7 @@
   inset: 0;
   z-index: 10;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 55%, oklch(30% 0.12 300 / 0.6), oklch(8% 0.03 290 / 0.92) 70%);
+  background: radial-gradient(ellipse at 50% 55%, color-mix(in oklch, var(--c-surface-high) 60%, transparent), color-mix(in oklch, var(--c-shade) 92%, transparent) 70%);
   backdrop-filter: blur(5px);
   animation: overlayIn 0.4s ease both;
   transition: opacity 0.5s ease 0.15s, backdrop-filter 0.5s ease;
@@ -27,11 +27,11 @@
   top: 7vh;
   inset-inline: 0;
   text-align: center;
-  font-family: var(--font-spooky);
+  font-family: var(--font-display);
   font-size: 8vh;
   letter-spacing: 0.04em;
-  color: var(--c-slime);
-  text-shadow: 0 0 3vh oklch(85% 0.22 135 / 0.7), 0 0.6vh 0 oklch(20% 0.08 140);
+  color: var(--c-accent);
+  text-shadow: 0 0 3vh color-mix(in oklch, var(--c-accent) 70%, transparent), 0 0.6vh 0 var(--c-on-accent);
   transition: opacity 0.3s ease;
 
   .flying & {
@@ -39,15 +39,15 @@
   }
 }
 
-.stirring {
+.shuffleText {
   display: inline-block;
   animation: wave 1.2s ease-in-out infinite;
 }
 
 .phrase {
   display: inline-block;
-  color: var(--c-pumpkin);
-  text-shadow: 0 0 3vh oklch(75% 0.19 55 / 0.8), 0 0.6vh 0 oklch(30% 0.1 40);
+  color: var(--c-primary);
+  text-shadow: 0 0 3vh color-mix(in oklch, var(--c-primary) 80%, transparent), 0 0.6vh 0 var(--c-on-primary);
   animation: phraseIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
@@ -91,18 +91,18 @@
   border-radius: 50%;
   background:
     radial-gradient(circle at 32% 28%, oklch(100% 0 0 / 0.85) 0 6%, transparent 18%),
-    radial-gradient(circle at 50% 45%, oklch(94% 0.12 85), oklch(77% 0.19 58) 55%, oklch(50% 0.18 40));
+    radial-gradient(circle at 50% 45%, var(--c-primary-light), var(--c-primary) 55%, var(--c-primary-dark));
   box-shadow:
-    0 0 8vh oklch(78% 0.19 60 / 0.9),
-    0 0 16vh oklch(60% 0.22 305 / 0.6),
-    inset 0 -3vh 5vh oklch(40% 0.15 40 / 0.7);
+    0 0 8vh color-mix(in oklch, var(--c-primary) 90%, transparent),
+    0 0 16vh color-mix(in oklch, var(--c-glow) 60%, transparent),
+    inset 0 -3vh 5vh color-mix(in oklch, var(--c-primary-shadow) 70%, transparent);
 
   .shuffling & {
     animation: shake 0.18s linear infinite;
     background:
       radial-gradient(circle at 32% 28%, oklch(100% 0 0 / 0.7) 0 6%, transparent 18%),
-      radial-gradient(circle at 50% 45%, oklch(92% 0.2 130), oklch(65% 0.22 140) 60%, oklch(35% 0.12 145));
-    box-shadow: 0 0 8vh oklch(85% 0.22 135 / 0.9), inset 0 -3vh 5vh oklch(30% 0.1 145 / 0.7);
+      radial-gradient(circle at 50% 45%, var(--c-accent), var(--c-accent-mid) 60%, var(--c-accent-shadow));
+    box-shadow: 0 0 8vh color-mix(in oklch, var(--c-accent) 90%, transparent), inset 0 -3vh 5vh color-mix(in oklch, var(--c-accent-shadow) 70%, transparent);
   }
 
   .revealing & {
@@ -114,11 +114,11 @@
   font-size: calc(var(--orb) * 0.52);
   font-weight: 700;
   line-height: 1;
-  color: oklch(22% 0.07 40);
-  text-shadow: 0 0.8vh 0 oklch(95% 0.12 85 / 0.7);
+  color: var(--c-on-primary);
+  text-shadow: 0 0.8vh 0 color-mix(in oklch, var(--c-primary-light) 70%, transparent);
 
   .shuffling & {
-    color: oklch(25% 0.08 145);
+    color: var(--c-on-accent);
     filter: blur(1.5px);
   }
 
@@ -131,7 +131,7 @@
   position: absolute;
   inset: calc(var(--orb) * -0.55);
   border-radius: 50%;
-  background: repeating-conic-gradient(oklch(85% 0.17 75 / 0.35) 0 8deg, transparent 8deg 22deg);
+  background: repeating-conic-gradient(color-mix(in oklch, var(--c-primary-light) 35%, transparent) 0 8deg, transparent 8deg 22deg);
   mask: radial-gradient(circle, black 25%, transparent 70%);
   opacity: 0;
   scale: 0.3;
@@ -151,8 +151,8 @@
   text-align: center;
   font-size: 6vh;
   font-weight: 700;
-  color: var(--c-bone);
-  text-shadow: 0 0.5vh 0 oklch(20% 0.08 300);
+  color: var(--c-text);
+  text-shadow: 0 0.5vh 0 var(--c-surface);
 
   & span {
     display: inline-block;
@@ -172,20 +172,20 @@
   text-align: center;
   font-size: 2.2vh;
   font-weight: 600;
-  color: var(--c-purple-light);
+  color: var(--c-text-muted);
   animation: hintBlink 1.6s ease-in-out 1s infinite both;
 }
 
-/* ---------- Cauldron ---------- */
+/* ---------- Draw machine (the theme's DrawMachine) ---------- */
 
-.cauldronWrap {
+.machine {
   position: absolute;
   left: 50%;
   bottom: -4vh;
   width: 52vh;
   translate: -50% 0;
   transition: translate 0.6s cubic-bezier(0.55, -0.4, 0.8, 0.5), opacity 0.4s ease;
-  animation: cauldronIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: machineIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 
   .revealing & {
     translate: -50% 18vh;
@@ -197,25 +197,6 @@
   }
 }
 
-.cauldron {
-  display: block;
-  width: 100%;
-  filter: drop-shadow(0 0 4vh oklch(80% 0.22 135 / 0.5));
-
-  .shuffling & {
-    animation: rumble 0.25s ease-in-out infinite;
-  }
-}
-
-.bubble {
-  position: absolute;
-  bottom: 62%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, oklch(98% 0.1 130), oklch(80% 0.24 135));
-  box-shadow: 0 0 1.5vh oklch(85% 0.22 135 / 0.8);
-  animation: rise 2.6s ease-in infinite;
-}
-
 /* ---------- Keyframes ---------- */
 
 @keyframes overlayIn {
@@ -224,7 +205,7 @@
   }
 }
 
-@keyframes cauldronIn {
+@keyframes machineIn {
   from {
     translate: -50% 60vh;
   }
@@ -243,26 +224,6 @@
   }
   75% {
     transform: translate(0.8vh, 0.5vh) rotate(-2deg);
-  }
-}
-
-@keyframes rumble {
-  50% {
-    transform: translateY(-0.6vh) rotate(1deg);
-  }
-}
-
-@keyframes rise {
-  0% {
-    transform: translateY(0) scale(0.4);
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-55vh) translateX(3vh) scale(1.3);
-    opacity: 0;
   }
 }
 

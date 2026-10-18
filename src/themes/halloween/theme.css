@@ -1,0 +1,142 @@
+/*
+ * Design tokens for the Halloween theme. Every theme defines the same set:
+ * component CSS only uses these, plus the per-level --hue set from levelHues.
+ * Translucent variants are made with color-mix(), so keep these opaque.
+ */
+:root {
+  color-scheme: dark;
+
+  --font-display: 'Creepster', 'Chiller', fantasy;
+  --font-body: 'Fredoka', 'Comic Sans MS', system-ui, sans-serif;
+
+  /* Text */
+  --c-text: oklch(96% 0.02 90);
+  --c-text-muted: oklch(78% 0.1 305);
+  --c-highlight: oklch(92% 0.14 95);
+
+  /* Surfaces (panels, dialogs, toolbars), darkest first */
+  --c-shade: oklch(9% 0.03 290);
+  --c-surface-low: oklch(14% 0.045 290);
+  --c-surface: oklch(19% 0.06 297);
+  --c-surface-high: oklch(30% 0.095 300);
+  --c-border: oklch(45% 0.12 303);
+  --c-glow: oklch(55% 0.2 305);
+
+  /* Primary: drawn numbers, the Draw and confirm buttons (pumpkin) */
+  --c-primary-light: oklch(91% 0.13 80);
+  --c-primary: oklch(75% 0.19 55);
+  --c-primary-dark: oklch(54% 0.18 42);
+  --c-primary-shadow: oklch(44% 0.16 41);
+  --c-on-primary: oklch(24% 0.07 40);
+
+  /* Secondary: Challenge and cancel buttons (witchy purple) */
+  --c-secondary: oklch(50% 0.19 304);
+  --c-secondary-dark: oklch(40% 0.18 300);
+  --c-secondary-shadow: oklch(28% 0.11 300);
+
+  /* Accent: titles, progress, the latest-number ring, focus outlines (slime) */
+  --c-accent: oklch(88% 0.23 133);
+  --c-accent-mid: oklch(66% 0.19 140);
+  --c-accent-dark: oklch(50% 0.15 145);
+  --c-accent-shadow: oklch(37% 0.13 140);
+  --c-on-accent: oklch(20% 0.08 140);
+
+  /* Glows behind the theme's Mascot and Token artwork */
+  --c-mascot-glow: oklch(90% 0.05 300);
+  --c-token-glow: oklch(80% 0.18 70);
+
+  /* Board cells */
+  --c-cell-text: oklch(84% 0.07 300);
+  --cell-bg: linear-gradient(180deg, oklch(32% 0.09 300), oklch(23% 0.07 295));
+  /* a pumpkin, ribs included */
+  --cell-drawn-bg:
+    radial-gradient(ellipse 28% 65% at 50% 55%, transparent 88%, oklch(45% 0.16 40 / 0.35) 92%, transparent 97%),
+    radial-gradient(ellipse 60% 70% at 50% 55%, transparent 90%, oklch(45% 0.16 40 / 0.3) 94%, transparent 98%),
+    radial-gradient(ellipse at 50% 35%, oklch(88% 0.15 75), oklch(73% 0.19 55) 55%, oklch(55% 0.18 42));
+
+  /* Large textured backgrounds */
+  --page-bg:
+    radial-gradient(ellipse at 80% 0%, oklch(32% 0.13 300), transparent 55%),
+    radial-gradient(ellipse at 10% 100%, oklch(28% 0.1 150 / 0.5), transparent 50%),
+    linear-gradient(180deg, oklch(18% 0.07 295), oklch(9% 0.03 285));
+  --board-bg:
+    radial-gradient(ellipse at 50% 0%, oklch(40% 0.14 305 / 0.45), transparent 60%),
+    linear-gradient(160deg, oklch(24% 0.07 300 / 0.88), oklch(13% 0.04 290 / 0.92));
+  /* printed cards: a moon and a few stars on a night sky */
+  --card-bg:
+    radial-gradient(circle at 88% 18%, oklch(95% 0.06 95) 0 4mm, oklch(90% 0.1 90 / 0.35) 4.5mm, transparent 12mm),
+    radial-gradient(circle at 12% 30%, #fff8 0 0.3mm, transparent 0.5mm),
+    radial-gradient(circle at 37% 12%, #fff8 0 0.3mm, transparent 0.5mm),
+    radial-gradient(circle at 63% 8%, #fff8 0 0.25mm, transparent 0.45mm),
+    radial-gradient(circle at 76% 34%, #fff8 0 0.3mm, transparent 0.5mm),
+    radial-gradient(ellipse at 50% 0%, oklch(36% 0.13 305), transparent 70%),
+    linear-gradient(170deg, oklch(24% 0.08 300), oklch(14% 0.05 290));
+}
+
+/* Global classes referenced from inline SVG artwork (Art.tsx) */
+.jol-glow {
+  animation: candle 0.15s ease-in-out infinite alternate;
+}
+
+.cd-flames path {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: flame 0.35s ease-in-out infinite alternate;
+
+  &:nth-child(2) {
+    animation-delay: -0.15s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: -0.25s;
+  }
+}
+
+.cd-bubble {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blob 1.2s ease-in-out infinite;
+}
+
+.cd-slime {
+  animation: slime 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes candle {
+  from {
+    opacity: 0.75;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flame {
+  from {
+    transform: scaleY(0.8) skewX(-6deg);
+  }
+  to {
+    transform: scaleY(1.15) skewX(6deg);
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes slime {
+  to {
+    filter: brightness(1.25);
+  }
+}

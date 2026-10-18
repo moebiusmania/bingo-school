@@ -8,18 +8,18 @@
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: oklch(16% 0.06 300 / 0.92);
-  border-bottom: 2px solid oklch(45% 0.13 305 / 0.6);
+  background: color-mix(in oklch, var(--c-surface) 92%, transparent);
+  border-bottom: 2px solid color-mix(in oklch, var(--c-border) 60%, transparent);
   backdrop-filter: blur(6px);
 }
 
 .back {
-  color: var(--c-purple-light);
+  color: var(--c-text-muted);
   font-weight: 600;
   text-decoration: none;
 
   &:hover {
-    color: var(--c-slime);
+    color: var(--c-accent);
   }
 }
 
@@ -30,15 +30,15 @@
   text-align: center;
 
   & strong {
-    font-family: var(--font-spooky);
+    font-family: var(--font-display);
     font-weight: 400;
     font-size: 26px;
     letter-spacing: 0.04em;
-    color: var(--c-pumpkin);
+    color: var(--c-primary);
   }
 
   & small {
-    color: var(--c-purple-light);
+    color: var(--c-text-muted);
   }
 }
 
@@ -59,16 +59,16 @@
 
 .primary {
   font-size: 18px;
-  color: oklch(22% 0.07 40);
-  background: linear-gradient(180deg, oklch(85% 0.15 75), oklch(70% 0.19 52));
-  box-shadow: 0 4px 0 oklch(45% 0.17 42);
+  color: var(--c-on-primary);
+  background: linear-gradient(180deg, var(--c-primary-light), var(--c-primary));
+  box-shadow: 0 4px 0 var(--c-primary-shadow);
 }
 
 .secondary {
   font-size: 15px;
-  color: var(--c-bone);
-  background: oklch(45% 0.15 300);
-  box-shadow: 0 4px 0 oklch(28% 0.1 300);
+  color: var(--c-text);
+  background: var(--c-secondary);
+  box-shadow: 0 4px 0 var(--c-secondary-shadow);
 }
 
 /* ---------- A4 sheets ---------- */

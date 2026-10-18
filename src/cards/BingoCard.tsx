@@ -1,22 +1,21 @@
-import { Bat, Cobweb, Ghost, JackOLantern } from '../components/Art.tsx';
+import { theme } from '@theme';
 import type { BingoCardData } from './generateCards.ts';
 import styles from './BingoCard.module.css';
 
-const DECORATIONS = [JackOLantern, Bat, Ghost];
+const { CardDecor, Mascot, cardFillers } = theme.art;
 
 export function BingoCard({ card }: { card: BingoCardData }) {
   let empties = 0;
   return (
     <article class={styles.card} aria-label={`Bingo card ${card.id}`}>
-      <Cobweb class={`${styles.web} ${styles.webLeft}`} />
-      <Cobweb class={`${styles.web} ${styles.webRight}`} />
+      {CardDecor && <CardDecor />}
 
       <header class={styles.header}>
         <div class={styles.brand}>
-          <Ghost class={styles.ghost} />
+          <Mascot class={styles.mascot} />
           <div class={styles.title}>
-            <span>Spooky</span>
-            <span>Bingo</span>
+            <span>{theme.title[0]}</span>
+            <span>{theme.title[1]}</span>
           </div>
         </div>
         <div class={styles.name}>
@@ -33,7 +32,7 @@ export function BingoCard({ card }: { card: BingoCardData }) {
         {card.rows.flatMap((row, r) =>
           row.map((n, c) => {
             if (n !== null) return <div key={`${r}-${c}`} class={styles.cell}>{n}</div>;
-            const Deco = DECORATIONS[(empties++ + card.id) % DECORATIONS.length];
+            const Deco = cardFillers[(empties++ + card.id) % cardFillers.length];
             return (
               <div key={`${r}-${c}`} class={styles.empty}>
                 <Deco class={styles.deco} />

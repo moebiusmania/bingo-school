@@ -1,7 +1,7 @@
+import { theme } from '@theme';
 import { useCallback, useEffect, useState } from 'preact/hooks';
 import { sound } from './audio/sound.ts';
 import { speakNumber, stopSpeaking } from './audio/speech.ts';
-import { BatsCanvas } from './components/BatsCanvas.tsx';
 import { ChallengeDialog } from './components/ChallengeDialog.tsx';
 import { Board } from './components/Board.tsx';
 import { CompleteDialog } from './components/CompleteDialog.tsx';
@@ -10,13 +10,14 @@ import { ControlPanel } from './components/ControlPanel.tsx';
 import { type DrawPhase, DrawOverlay } from './components/DrawOverlay.tsx';
 import { FullscreenButton } from './components/FullscreenButton.tsx';
 import { FxCanvas } from './components/FxCanvas.tsx';
-import { SkyCanvas } from './components/SkyCanvas.tsx';
 import { burst, burstAt } from './fx/fx.ts';
 import { useStoredBoolean } from './game/useStoredBoolean.ts';
 import { TOTAL_NUMBERS, useBingo } from './game/useBingo.ts';
 import styles from './App.module.css';
 
 type Phase = 'idle' | DrawPhase;
+
+const { Background, Foreground } = theme;
 
 const SHUFFLE_MS = 2200;
 const REVEAL_MS = 2600;
@@ -144,7 +145,7 @@ export function App() {
 
   return (
     <>
-      <SkyCanvas />
+      {Background && <Background />}
       <main class={styles.app}>
         <Board
           drawn={game.drawnSet}
@@ -175,7 +176,7 @@ export function App() {
           }}
         />
       </main>
-      <BatsCanvas />
+      {Foreground && <Foreground />}
       <FullscreenButton />
 
       {phase !== 'idle' && pending !== null && (

@@ -3,13 +3,11 @@
   height: 100%;
   padding: 2.4cqh;
   border-radius: 3cqh;
-  background:
-    radial-gradient(ellipse at 50% 0%, oklch(40% 0.14 305 / 0.45), transparent 60%),
-    linear-gradient(160deg, oklch(24% 0.07 300 / 0.88), oklch(13% 0.04 290 / 0.92));
-  border: 3px solid oklch(45% 0.13 305 / 0.7);
+  background: var(--board-bg);
+  border: 3px solid color-mix(in oklch, var(--c-border) 70%, transparent);
   box-shadow:
-    0 0 0 0.7cqh oklch(10% 0.03 290 / 0.7),
-    0 0 8cqh oklch(55% 0.2 305 / 0.35),
+    0 0 0 0.7cqh color-mix(in oklch, var(--c-shade) 70%, transparent),
+    0 0 8cqh color-mix(in oklch, var(--c-glow) 35%, transparent),
     inset 0 0 6cqh oklch(0% 0 0 / 0.55);
 }
 
@@ -27,10 +25,10 @@
   display: grid;
   place-items: center;
   border-radius: 1.6cqh;
-  background: linear-gradient(180deg, oklch(32% 0.09 300), oklch(23% 0.07 295));
-  border: 2px solid oklch(44% 0.11 300 / 0.85);
+  background: var(--cell-bg);
+  border: 2px solid color-mix(in oklch, var(--c-border) 85%, transparent);
   box-shadow: inset 0 -0.5cqh 0 oklch(0% 0 0 / 0.3), 0 0.4cqh 0.8cqh oklch(0% 0 0 / 0.35);
-  color: oklch(84% 0.07 300);
+  color: var(--c-cell-text);
   cursor: default;
   transition: translate 0.2s ease, rotate 0.2s ease, box-shadow 0.3s ease;
   animation: appear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--i) * 7ms) backwards;
@@ -50,37 +48,19 @@
   }
 }
 
-/* A drawn number turns into a little pumpkin */
+/* The theme's drawnCellClass can decorate drawn cells further (e.g. a pumpkin stem in ::after) */
 .drawn {
-  background:
-    radial-gradient(ellipse 28% 65% at 50% 55%, transparent 88%, oklch(45% 0.16 40 / 0.35) 92%, transparent 97%),
-    radial-gradient(ellipse 60% 70% at 50% 55%, transparent 90%, oklch(45% 0.16 40 / 0.3) 94%, transparent 98%),
-    radial-gradient(ellipse at 50% 35%, oklch(88% 0.15 75), oklch(73% 0.19 55) 55%, oklch(55% 0.18 42));
-  border-color: oklch(62% 0.2 45);
-  color: oklch(24% 0.07 40);
+  background: var(--cell-drawn-bg);
+  border-color: var(--c-primary-dark);
+  color: var(--c-on-primary);
   box-shadow:
-    0 0 2.2cqh oklch(75% 0.19 55 / 0.6),
-    inset 0 -0.6cqh 0 oklch(42% 0.15 40 / 0.5);
+    0 0 2.2cqh color-mix(in oklch, var(--c-primary) 60%, transparent),
+    inset 0 -0.6cqh 0 color-mix(in oklch, var(--c-primary-shadow) 50%, transparent);
   animation: markIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 
   & span {
     font-weight: 700;
-    text-shadow: 0 2.5cqh 0 oklch(95% 0.1 85 / 0.7);
-  }
-
-  /* stem */
-  &::after {
-    content: '';
-    position: absolute;
-    top: -11cqh;
-    left: 50%;
-    width: 13cqh;
-    height: 18cqh;
-    translate: -50% 0;
-    rotate: 14deg;
-    border-radius: 40% 40% 20% 20%;
-    background: linear-gradient(oklch(62% 0.15 140), oklch(45% 0.12 140));
-    box-shadow: 0 0 0 1px oklch(30% 0.08 140);
+    text-shadow: 0 2.5cqh 0 color-mix(in oklch, var(--c-primary-light) 70%, transparent);
   }
 }
 
@@ -95,7 +75,7 @@
     position: absolute;
     inset: -8cqh;
     border-radius: 24cqh;
-    border: 5cqh solid oklch(88% 0.24 135);
+    border: 5cqh solid var(--c-accent);
     animation: ring 1.3s ease-out 0.8s infinite;
   }
 }
@@ -108,62 +88,17 @@
   animation: shiver 0.35s ease-in-out calc(var(--i) * 5ms) 2;
 }
 
-.lantern {
+/* The theme's Token in the grid's last slot */
+.corner {
   display: grid;
   place-items: center;
   animation: appear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s backwards;
 }
 
-.lanternArt {
+.cornerArt {
   height: 92%;
-  filter: drop-shadow(0 0 1.6cqh oklch(80% 0.18 70 / 0.8));
-  animation: lanternBob 2.6s ease-in-out infinite;
-}
-
-.web {
-  position: absolute;
-  top: -0.3cqh;
-  width: 12cqh;
-  height: 12cqh;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.webLeft {
-  left: -0.3cqh;
-}
-
-.webRight {
-  right: -0.3cqh;
-  scale: -1 1;
-}
-
-.spider {
-  position: absolute;
-  top: 0;
-  left: 63%;
-  z-index: 4;
-  width: 5.5cqh;
-  pointer-events: none;
-  transform-origin: top center;
-  animation: spiderDrop 14s ease-in-out infinite;
-
-  /* the silk thread */
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 85%;
-    left: 50%;
-    width: 1.5px;
-    height: 40cqh;
-    background: oklch(92% 0.03 300 / 0.6);
-  }
-
-  & svg {
-    display: block;
-    width: 100%;
-    animation: spiderWiggle 0.6s ease-in-out infinite alternate;
-  }
+  filter: drop-shadow(0 0 1.6cqh color-mix(in oklch, var(--c-token-glow) 80%, transparent));
+  animation: cornerBob 2.6s ease-in-out infinite;
 }
 
 @keyframes appear {
@@ -209,8 +144,8 @@
   50% {
     transform: scale(1.1);
     box-shadow:
-      0 0 3.5cqh oklch(88% 0.24 135 / 0.9),
-      inset 0 -0.6cqh 0 oklch(42% 0.15 40 / 0.5);
+      0 0 3.5cqh color-mix(in oklch, var(--c-accent) 90%, transparent),
+      inset 0 -0.6cqh 0 color-mix(in oklch, var(--c-primary-shadow) 50%, transparent);
   }
 }
 
@@ -225,29 +160,8 @@
   }
 }
 
-@keyframes lanternBob {
+@keyframes cornerBob {
   50% {
     transform: translateY(-0.6cqh) rotate(4deg);
-  }
-}
-
-@keyframes spiderDrop {
-  0%,
-  55%,
-  100% {
-    transform: translateY(-110%);
-  }
-  65%,
-  85% {
-    transform: translateY(12cqh);
-  }
-  75% {
-    transform: translateY(9cqh);
-  }
-}
-
-@keyframes spiderWiggle {
-  to {
-    rotate: 8deg;
   }
 }

@@ -7,8 +7,8 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &[data-result='correct'] {
-    border-color: var(--c-slime);
-    box-shadow: 0 0 12vh oklch(80% 0.22 135 / 0.7);
+    border-color: var(--c-accent);
+    box-shadow: 0 0 12vh color-mix(in oklch, var(--c-accent) 70%, transparent);
     animation: cheer 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
@@ -50,17 +50,17 @@
   border-radius: 2vh;
   font-size: 3.6vh;
   font-weight: 600;
-  background: oklch(12% 0.04 295 / 0.6);
+  background: color-mix(in oklch, var(--c-surface-low) 60%, transparent);
   animation: answerIn 0.5s ease 0.5s backwards;
 }
 
 .answerLabel {
-  color: var(--c-candle);
+  color: var(--c-highlight);
 }
 
 /* Rubber stamp that slams onto the card's top corner */
 .stamp {
-  --stamp: var(--c-slime);
+  --stamp: var(--c-accent);
   position: absolute;
   top: -4vh;
   right: -3vw;
@@ -70,11 +70,11 @@
   padding: 1vh 2vw 1vh 1.2vw;
   border: 0.7vh solid var(--stamp);
   border-radius: 2.5vh;
-  font-family: var(--font-spooky);
+  font-family: var(--font-display);
   font-size: 8vh;
   line-height: 1;
   color: var(--stamp);
-  background: oklch(18% 0.06 295 / 0.92);
+  background: color-mix(in oklch, var(--c-surface) 92%, transparent);
   text-shadow: 0 0 3vh color-mix(in oklch, var(--stamp) 70%, transparent);
   box-shadow: 0 0 4vh color-mix(in oklch, var(--stamp) 50%, transparent);
   rotate: 10deg;
@@ -96,7 +96,7 @@
 }
 
 .judge {
-  --shadow: oklch(30% 0.1 300);
+  --shadow: var(--c-secondary-shadow);
   display: flex;
   align-items: center;
   gap: 1vw;
@@ -121,7 +121,7 @@
   }
 
   &:focus-visible {
-    outline: 0.5vh solid var(--c-bone);
+    outline: 0.5vh solid var(--c-text);
     outline-offset: 0.6vh;
   }
 
@@ -131,14 +131,14 @@
 }
 
 .correct {
-  --shadow: oklch(40% 0.14 140);
-  color: oklch(20% 0.07 140);
-  background: linear-gradient(180deg, oklch(90% 0.2 133), oklch(70% 0.2 140));
+  --shadow: var(--c-accent-shadow);
+  color: var(--c-on-accent);
+  background: linear-gradient(180deg, var(--c-accent), var(--c-accent-mid));
 }
 
 .wrong {
   --shadow: oklch(35% 0.14 25);
-  color: var(--c-bone);
+  color: var(--c-text);
   background: linear-gradient(180deg, oklch(66% 0.2 25), oklch(50% 0.19 25));
 }
 

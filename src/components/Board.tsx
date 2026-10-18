@@ -1,5 +1,5 @@
+import { theme } from '@theme';
 import { TOTAL_NUMBERS } from '../game/useBingo.ts';
-import { Cobweb, JackOLantern, Spider } from './Art.tsx';
 import styles from './Board.module.css';
 
 interface BoardProps {
@@ -11,13 +11,12 @@ interface BoardProps {
 }
 
 const NUMBERS = Array.from({ length: TOTAL_NUMBERS }, (_, i) => i + 1);
+const { BoardDecor, Token } = theme.art;
 
 export function Board({ drawn, latest, resetting, gameId }: BoardProps) {
   return (
     <section class={styles.frame} aria-label='Bingo board'>
-      <Cobweb class={`${styles.web} ${styles.webLeft}`} />
-      <Cobweb class={`${styles.web} ${styles.webRight}`} />
-      <Spider class={styles.spider} />
+      {BoardDecor && <BoardDecor />}
 
       <div class={styles.grid} key={gameId}>
         {NUMBERS.map((n) => {
@@ -25,6 +24,7 @@ export function Board({ drawn, latest, resetting, gameId }: BoardProps) {
           const cls = [
             styles.cell,
             isDrawn && styles.drawn,
+            isDrawn && theme.drawnCellClass,
             n === latest && !resetting && styles.latest,
             resetting && (isDrawn ? styles.leaving : styles.shiver),
           ].filter(Boolean).join(' ');
@@ -40,8 +40,9 @@ export function Board({ drawn, latest, resetting, gameId }: BoardProps) {
             </div>
           );
         })}
-        <div class={styles.lantern} style={{ '--i': 100 }}>
-          <JackOLantern class={styles.lanternArt} />
+        {/* the 100th slot of the 10×10 grid */}
+        <div class={styles.corner} style={{ '--i': 100 }}>
+          <Token class={styles.cornerArt} />
         </div>
       </div>
     </section>

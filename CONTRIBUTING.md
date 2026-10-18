@@ -37,7 +37,8 @@ The deploy workflow runs the same check and build, so a pull request that fails 
 - **Sizing.** Board and control panel CSS uses container query units (`cqh`/`cqw`) relative to the app, not `vh`/`vw`. Full-screen overlays and dialogs use `vh`/`vw`. Board cells must keep their `data-num` attribute, because the draw animation uses it to find each cell.
 - **Base path.** The site is served from `/bingo-school/`. Write in-app links with `import.meta.env.BASE_URL`, never a hard-coded `/`.
 - **Preact 11.** Numeric style values don't get an automatic `px`, so pass strings with units, for example `'12px'`. CSS custom properties can go straight into `style` objects.
-- **No audio files.** New sound effects go in `src/audio/sound.ts` and are synthesized with the Web Audio API.
+- **No audio files.** Sound effects are synthesized with the Web Audio API. Theme-neutral ones go in `src/audio/defaultSounds.ts`, themed ones in the theme's `sounds.ts`.
+- **Themes.** Components in `src/components/` stay theme-neutral: take artwork, text and sounds from `theme` (`import { theme } from '@theme'`), and colors only from the tokens in the theme's `theme.css`. Anything that only makes sense for one theme goes in its folder under `src/themes/`.
 - **Storage.** Anything saved in `localStorage` uses a `spooky-bingo:` key prefix and is wrapped in `try`/`catch`.
 - **Match the surrounding code.** Follow the naming, formatting and comment style of the file you're editing. Strings use single quotes.
 
@@ -45,7 +46,7 @@ The deploy workflow runs the same check and build, so a pull request that fails 
 
 ## Writing challenges
 
-Challenges live in [`src/game/challenges.json`](src/game/challenges.json):
+Challenges live in each theme's `challenges.json`, for example [`src/themes/halloween/challenges.json`](src/themes/halloween/challenges.json):
 
 ```json
 { "title": "Spell it!", "prompt": "Spell the word:\nGHOST", "answer": "G - H - O - S - T" }

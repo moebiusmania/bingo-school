@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'preact/hooks';
-import { runCanvas } from './canvas.ts';
-import styles from './Layers.module.css';
+import { runCanvas } from '../../components/canvas.ts';
+import styles from '../../components/Layers.module.css';
 
 interface Bat {
   x: number;
@@ -99,5 +99,5 @@ export function BatsCanvas() {
     );
   }, []);
 
-  return <canvas ref={ref} class={styles.bats} aria-hidden='true' />;
+  return <canvas ref={ref} class={styles.foreground} aria-hidden='true' />;
 }

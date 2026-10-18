@@ -3,13 +3,13 @@
   padding-top: 7vh;
 }
 
-.hat {
+.icon {
   position: absolute;
   top: -7vh;
   width: 13vh;
   rotate: -12deg;
-  filter: drop-shadow(0 0 2vh oklch(80% 0.15 95 / 0.5));
-  animation: hatWobble 2.6s ease-in-out infinite;
+  filter: drop-shadow(0 0 2vh color-mix(in oklch, var(--c-highlight) 50%, transparent));
+  animation: iconWobble 2.6s ease-in-out infinite;
 }
 
 .levels {
@@ -20,7 +20,7 @@
   margin-block: 1vh;
 }
 
-/* Each level gets warmer and more dangerous: green -> yellow -> orange -> red -> purple */
+/* --hue (from the theme's levelHues) and --delay are set inline for each level */
 .level {
   --hue: 140;
   --shadow: oklch(35% 0.12 var(--hue));
@@ -51,28 +51,8 @@
   }
 
   &:focus-visible {
-    outline: 0.5vh solid var(--c-bone);
+    outline: 0.5vh solid var(--c-text);
     outline-offset: 0.6vh;
-  }
-
-  &[data-level='1'] {
-    --hue: 140;
-    --delay: 1;
-  }
-
-  &[data-level='2'] {
-    --hue: 100;
-    --delay: 2;
-  }
-
-  &[data-level='3'] {
-    --hue: 60;
-    --delay: 3;
-  }
-
-  &[data-level='4'] {
-    --hue: 28;
-    --delay: 4;
   }
 }
 
@@ -84,7 +64,7 @@
 }
 
 .levelNumber {
-  font-family: var(--font-spooky);
+  font-family: var(--font-display);
   font-size: 13vh;
   line-height: 0.9;
   text-shadow: 0 0.6vh 0 oklch(100% 0 0 / 0.4);
@@ -92,7 +72,7 @@
 
 .levelName {
   margin-top: -0.5vh;
-  font-family: var(--font-spooky);
+  font-family: var(--font-display);
   font-size: 3.6vh;
   line-height: 1.1;
   letter-spacing: 0.04em;
@@ -103,32 +83,30 @@
 
 /* Level 5: the big one */
 .bingo {
-  --hue: 305;
-  --delay: 5;
-  color: var(--c-bone);
-  border-color: var(--c-candle);
+  color: var(--c-text);
+  border-color: var(--c-highlight);
   background:
-    radial-gradient(ellipse at 50% 20%, oklch(60% 0.22 305), oklch(32% 0.15 300));
-  box-shadow: 0 1vh 0 oklch(22% 0.1 300), 0 0 5vh oklch(85% 0.15 90 / 0.6);
+    radial-gradient(ellipse at 50% 20%, oklch(60% 0.22 var(--hue)), oklch(32% 0.15 var(--hue)));
+  box-shadow: 0 1vh 0 oklch(22% 0.1 var(--hue)), 0 0 5vh color-mix(in oklch, var(--c-highlight) 60%, transparent);
   animation:
     levelIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 400ms backwards,
     bingoGlow 1.8s ease-in-out 0.9s infinite;
 
   & .levelNumber {
-    color: var(--c-candle);
-    text-shadow: 0 0 3vh oklch(90% 0.14 95 / 0.8);
+    color: var(--c-highlight);
+    text-shadow: 0 0 3vh color-mix(in oklch, var(--c-highlight) 80%, transparent);
   }
 }
 
 .bingoLabel {
   margin-top: -1vh;
-  font-family: var(--font-spooky);
+  font-family: var(--font-display);
   font-size: 4.5vh;
   line-height: 1.1;
   letter-spacing: 0.05em;
   text-align: center;
-  color: var(--c-slime);
-  text-shadow: 0 0 2vh oklch(88% 0.23 133 / 0.8);
+  color: var(--c-accent);
+  text-shadow: 0 0 2vh color-mix(in oklch, var(--c-accent) 80%, transparent);
   animation: bingoWobble 1.2s ease-in-out infinite;
 }
 
@@ -138,16 +116,16 @@
   margin-top: auto;
   padding-top: 1vh;
 
-  & svg {
+  & > * {
     width: 3.2vh;
   }
 }
 
-.pumpkinOn {
-  filter: drop-shadow(0 0 0.6vh oklch(80% 0.18 70 / 0.9));
+.tokenOn {
+  filter: drop-shadow(0 0 0.6vh color-mix(in oklch, var(--c-token-glow) 90%, transparent));
 }
 
-.pumpkinOff {
+.tokenOff {
   opacity: 0.3;
   filter: grayscale(1) brightness(0.6);
 }
@@ -161,7 +139,7 @@
 
 @keyframes bingoGlow {
   50% {
-    box-shadow: 0 1vh 0 oklch(22% 0.1 300), 0 0 9vh oklch(85% 0.15 90 / 0.9);
+    box-shadow: 0 1vh 0 oklch(22% 0.1 var(--hue)), 0 0 9vh color-mix(in oklch, var(--c-highlight) 90%, transparent);
   }
 }
 
@@ -175,7 +153,7 @@
   }
 }
 
-@keyframes hatWobble {
+@keyframes iconWobble {
   50% {
     transform: translateY(-1vh) rotate(8deg);
   }

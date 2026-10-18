@@ -1,0 +1,12 @@
+{
+  "name": "Spooky Bingo",
+  "favicon": "🎃",
+  "themeColor": "#1b1030",
+  "ogImage": "og-image.jpg",
+  "ogImageAlt": "Spooky Bingo: a bingo board with pumpkin-marked numbers, a ghost and a jack-o'-lantern under a full moon",
+  "description": {
+    "board": "A Halloween bingo board for the classroom: draw the numbers 1 to 99 with spooky sounds and animations, then play English challenges for kids aged 7 to 10.",
+    "cards": "Printable Spooky Bingo cards: 24 unique Halloween tombola cards on A4 sheets, ready to print and cut for the classroom.",
+    "answers": "The answers to every Spooky Bingo English challenge, for the host."
+  }
+}

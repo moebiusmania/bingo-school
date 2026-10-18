@@ -1,14 +1,4 @@
-:root {
-  --c-night: oklch(15% 0.05 295);
-  --c-purple-light: oklch(78% 0.1 305);
-  --c-pumpkin: oklch(75% 0.19 55);
-  --c-slime: oklch(88% 0.23 133);
-  --c-bone: oklch(96% 0.02 90);
-  --c-candle: oklch(92% 0.14 95);
-  --font-spooky: 'Creepster', 'Chiller', fantasy;
-  --font-fun: 'Fredoka', 'Comic Sans MS', system-ui, sans-serif;
-  color-scheme: dark;
-}
+/* Theme-neutral base styles. Colors and fonts come from the active theme's theme.css */
 
 *,
 *::before,
@@ -25,87 +15,16 @@ body,
 
 body {
   overflow: auto;
-  background:
-    radial-gradient(ellipse at 80% 0%, oklch(32% 0.13 300), transparent 55%),
-    radial-gradient(ellipse at 10% 100%, oklch(28% 0.1 150 / 0.5), transparent 50%),
-    linear-gradient(180deg, oklch(18% 0.07 295), oklch(9% 0.03 285));
+  background: var(--page-bg);
   background-attachment: fixed;
-  color: var(--c-bone);
-  font-family: var(--font-fun);
+  color: var(--c-text);
+  font-family: var(--font-body);
   user-select: none;
   -webkit-font-smoothing: antialiased;
 }
 
 button {
   font: inherit;
-}
-
-/* Global classes referenced from inline SVG artwork (Art.tsx) */
-.jol-glow {
-  animation: candle 0.15s ease-in-out infinite alternate;
-}
-
-.cd-flames path {
-  transform-box: fill-box;
-  transform-origin: bottom center;
-  animation: flame 0.35s ease-in-out infinite alternate;
-
-  &:nth-child(2) {
-    animation-delay: -0.15s;
-  }
-
-  &:nth-child(3) {
-    animation-delay: -0.25s;
-  }
-}
-
-.cd-bubble {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: blob 1.2s ease-in-out infinite;
-}
-
-.cd-slime {
-  animation: slime 1.6s ease-in-out infinite alternate;
-}
-
-@keyframes candle {
-  from {
-    opacity: 0.75;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes flame {
-  from {
-    transform: scaleY(0.8) skewX(-6deg);
-  }
-  to {
-    transform: scaleY(1.15) skewX(6deg);
-  }
-}
-
-@keyframes blob {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  80% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
-}
-
-@keyframes slime {
-  to {
-    filter: brightness(1.25);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

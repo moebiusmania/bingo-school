@@ -1,13 +1,10 @@
+import { theme } from '@theme';
 import { numberToWords } from '../game/numberWords.ts';
 import { sound } from './sound.ts';
 
 const supported = 'speechSynthesis' in globalThis;
 // Browsers load voices lazily: ask early so Daniel is ready for the first draw.
 if (supported) speechSynthesis.getVoices();
-
-/** Deep and slow for a spooky, but still clear, announcement. */
-const PITCH = 0.75;
-const RATE = 0.8;
 
 /** Higher scores for the natural-sounding voices browsers ship; robotic ones last. */
 function voiceScore(v: SpeechSynthesisVoice): number {
@@ -43,8 +40,8 @@ export function speakNumber(n: number, delayMs = 450): void {
   const voice = voices.find((v) => DEFAULT_VOICE.test(v.name)) ?? voices[0];
   if (voice) utterance.voice = voice;
   utterance.lang = voice?.lang ?? 'en-US';
-  utterance.rate = RATE;
-  utterance.pitch = PITCH;
+  utterance.rate = theme.voice.rate;
+  utterance.pitch = theme.voice.pitch;
   utterance.volume = 1;
   utterance.onstart = () => sound.duck(true);
   utterance.onend = utterance.onerror = () => sound.duck(false);

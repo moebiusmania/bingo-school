@@ -1,24 +1,13 @@
-import data from './challenges.json' with { type: 'json' };
+import { theme } from '@theme';
 
 export const CHALLENGE_LEVELS = [1, 2, 3, 4, 5] as const;
 export type ChallengeLevel = (typeof CHALLENGE_LEVELS)[number];
 
-export const LEVEL_NAMES: Record<ChallengeLevel, string> = {
-  1: 'Boo Boo!',
-  2: 'Three Bats!',
-  3: 'Four Cats!',
-  4: 'Five Pumpkins!',
-  5: 'Trick or Treat!',
-};
+/** What the class shouts for each win; set by the theme. */
+export const LEVEL_NAMES = theme.levelNames;
 
-/** Same colors as the level buttons in ChallengeDialog.module.css. */
-export const LEVEL_HUES: Record<ChallengeLevel, number> = {
-  1: 140,
-  2: 100,
-  3: 60,
-  4: 28,
-  5: 305,
-};
+/** OKLCH hue of each level's colors; set by the theme. */
+export const LEVEL_HUES = theme.levelHues;
 
 export interface Challenge {
   /** Short kid-facing heading, e.g. "Spell it!". */
@@ -29,7 +18,7 @@ export interface Challenge {
   answer: string;
 }
 
-export const CHALLENGES: Record<ChallengeLevel, Challenge[]> = data;
+export const CHALLENGES = theme.challenges;
 
 // Each level deals its challenges like a shuffled deck, so none repeats until all have been used
 const decks = new Map<ChallengeLevel, Challenge[]>();

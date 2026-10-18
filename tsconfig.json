@@ -12,7 +12,10 @@
     "isolatedModules": true,
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@theme": ["./src/themes/halloween/index.ts"]
+    }
   },
   "include": ["src", "vite.config.ts"]
 }

@@ -14,17 +14,3 @@ export function numberToWords(n: number): string {
   const ones = n % 10;
   return ones ? `${tens}-${ONES[ones]}` : tens;
 }
-
-const PHRASES = [
-  'Boo! It\'s…',
-  'Abracadabra!',
-  'Spooky number…',
-  'The cauldron says…',
-  'Hocus pocus!',
-  'Eek! It\'s…',
-  'Trick or treat!',
-];
-
-export function randomPhrase(): string {
-  return PHRASES[Math.floor(Math.random() * PHRASES.length)];
-}

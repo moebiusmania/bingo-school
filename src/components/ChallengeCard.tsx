@@ -1,12 +1,15 @@
+import { theme } from '@theme';
 import { useRef, useState } from 'preact/hooks';
 import { sound } from '../audio/sound.ts';
 import { burst, burstAt } from '../fx/fx.ts';
+import { dot } from '../fx/shapes.ts';
 import { type Challenge, type ChallengeLevel, LEVEL_HUES } from '../game/challenges.ts';
-import { Ghost, JackOLantern } from './Art.tsx';
 import dialogStyles from './Dialog.module.css';
 import styles from './ChallengeCard.module.css';
 
 type Result = 'correct' | 'wrong';
+
+const { Mascot, Token } = theme.art;
 
 interface ChallengeCardProps {
   level: ChallengeLevel;
@@ -56,8 +59,8 @@ export function ChallengeCard(
           burstAt(stampRef.current, {
             count: 30,
             power: 6,
-            shapes: ['dot'],
-            colors: ['#8a7f99', '#5d5370', '#b9a8d1'],
+            shapes: [dot],
+            colors: theme.particles.dudColors,
           }),
         250,
       );
@@ -81,8 +84,8 @@ export function ChallengeCard(
         <>
           <div ref={stampRef} class={styles.stamp}>
             {result === 'correct'
-              ? <JackOLantern class={styles.stampArt} />
-              : <Ghost class={styles.stampArt} />}
+              ? <Token class={styles.stampArt} />
+              : <Mascot class={styles.stampArt} />}
             <span>{result === 'correct' ? 'Correct!' : 'Oops!'}</span>
           </div>
           <p class={styles.answer}>

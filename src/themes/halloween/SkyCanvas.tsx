@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'preact/hooks';
-import { runCanvas } from './canvas.ts';
-import styles from './Layers.module.css';
+import { runCanvas } from '../../components/canvas.ts';
+import styles from '../../components/Layers.module.css';
 
 interface Star {
   x: number;
@@ -95,5 +95,5 @@ export function SkyCanvas() {
     );
   }, []);
 
-  return <canvas ref={ref} class={styles.sky} aria-hidden='true' />;
+  return <canvas ref={ref} class={styles.background} aria-hidden='true' />;
 }

@@ -1,7 +1,7 @@
+import { theme } from '@theme';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { burstAt } from '../fx/fx.ts';
-import { numberToWords, randomPhrase } from '../game/numberWords.ts';
-import { Cauldron } from './Art.tsx';
+import { numberToWords } from '../game/numberWords.ts';
 import styles from './DrawOverlay.module.css';
 
 export type DrawPhase = 'shuffling' | 'revealing' | 'flying';
@@ -9,16 +9,14 @@ export type DrawPhase = 'shuffling' | 'revealing' | 'flying';
 interface DrawOverlayProps {
   phase: DrawPhase;
   number: number;
-  /** Numbers flashed in the orb while the cauldron is being stirred. */
+  /** Numbers flashed in the orb while shuffling. */
   pool: readonly number[];
   onSkip: () => void;
 }
 
-const BUBBLES = Array.from({ length: 12 }, (_, i) => ({
-  x: 10 + Math.random() * 80,
-  delay: -i * 0.23,
-  size: 1 + Math.random() * 2.2,
-}));
+const { DrawMachine } = theme.art;
+const { drawPhrases } = theme.text;
+const randomPhrase = () => drawPhrases[Math.floor(Math.random() * drawPhrases.length)];
 
 export function DrawOverlay({ phase, number, pool, onSkip }: DrawOverlayProps) {
   const anchorRef = useRef<HTMLDivElement>(null);
@@ -27,7 +25,7 @@ export function DrawOverlay({ phase, number, pool, onSkip }: DrawOverlayProps) {
   const [flyTransform, setFlyTransform] = useState<string>();
   const phrase = useMemo(randomPhrase, [number]);
 
-  // Flash random numbers while stirring
+  // Flash random numbers while shuffling
   useEffect(() => {
     if (phase !== 'shuffling') return;
     const id = setInterval(() => {
@@ -38,7 +36,7 @@ export function DrawOverlay({ phase, number, pool, onSkip }: DrawOverlayProps) {
 
   useEffect(() => {
     if (phase !== 'revealing') return;
-    // wait for the orb to finish jumping out of the cauldron
+    // wait for the orb to finish jumping out of the draw machine
     const t = setTimeout(() => burstAt(orbRef.current, { count: 90, power: 16, size: 11 }), 350);
     return () => clearTimeout(t);
   }, [phase]);
@@ -69,7 +67,7 @@ export function DrawOverlay({ phase, number, pool, onSkip }: DrawOverlayProps) {
     >
       <div class={styles.caption}>
         {phase === 'shuffling'
-          ? <span class={styles.stirring}>Stirring the cauldron…</span>
+          ? <span class={styles.shuffleText}>{theme.text.shuffling}</span>
           : <span class={styles.phrase} key={number}>{phrase}</span>}
       </div>
 
@@ -90,20 +88,8 @@ export function DrawOverlay({ phase, number, pool, onSkip }: DrawOverlayProps) {
         {phase !== 'shuffling' && <span key={number}>{numberToWords(number)}</span>}
       </div>
 
-      <div class={styles.cauldronWrap}>
-        {BUBBLES.map((b, i) => (
-          <span
-            key={i}
-            class={styles.bubble}
-            style={{
-              left: `${b.x}%`,
-              width: `${b.size}vh`,
-              height: `${b.size}vh`,
-              animationDelay: `${b.delay}s`,
-            }}
-          />
-        ))}
-        <Cauldron class={styles.cauldron} />
+      <div class={styles.machine}>
+        <DrawMachine phase={phase} />
       </div>
 
       {phase === 'revealing' && <div class={styles.hint}>Click or press Space to continue</div>}

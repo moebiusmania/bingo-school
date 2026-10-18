@@ -1,6 +1,7 @@
+import { theme } from '@theme';
 import { numberToWords } from '../game/numberWords.ts';
 import { TOTAL_NUMBERS } from '../game/useBingo.ts';
-import { BroomIcon, CauldronIcon, Ghost, SpeakerIcon, VoiceIcon, WitchHatIcon } from './Art.tsx';
+import { SpeakerIcon, VoiceIcon } from './Icons.tsx';
 import styles from './ControlPanel.module.css';
 
 interface ControlPanelProps {
@@ -18,6 +19,7 @@ interface ControlPanelProps {
 }
 
 const HISTORY_SIZE = 6;
+const { Mascot, DrawIcon, ChallengeIcon, ResetIcon } = theme.art;
 
 function WobblyText({ text, class: cls }: { text: string; class?: string }) {
   return (
@@ -36,15 +38,15 @@ export function ControlPanel(props: ControlPanelProps) {
 
   let drawLabel = 'Draw!';
   if (finished) drawLabel = 'All done!';
-  else if (busy) drawLabel = 'Stirring…';
+  else if (busy) drawLabel = theme.text.drawing;
 
   return (
     <aside class={styles.panel}>
       <header class={styles.header}>
-        <Ghost class={styles.ghost} />
+        <Mascot class={styles.mascot} />
         <h1 class={styles.title}>
-          <WobblyText text='Spooky' class={styles.titleLine} />
-          <WobblyText text='Bingo' class={styles.titleLine} />
+          <WobblyText text={theme.title[0]} class={styles.titleLine} />
+          <WobblyText text={theme.title[1]} class={styles.titleLine} />
         </h1>
       </header>
 
@@ -73,7 +75,7 @@ export function ControlPanel(props: ControlPanelProps) {
         aria-busy={busy}
         onClick={props.onDraw}
       >
-        <CauldronIcon class={styles.drawIcon} />
+        <DrawIcon class={styles.drawIcon} />
         <span class={styles.drawText}>
           {drawLabel}
           {!busy && !finished && <small>or press Space</small>}
@@ -86,7 +88,7 @@ export function ControlPanel(props: ControlPanelProps) {
         disabled={busy}
         onClick={props.onChallenge}
       >
-        <WitchHatIcon class={styles.icon} />
+        <ChallengeIcon class={styles.icon} />
         <span>Challenge</span>
       </button>
 
@@ -96,7 +98,7 @@ export function ControlPanel(props: ControlPanelProps) {
         disabled={busy || drawn.length === 0}
         onClick={props.onReset}
       >
-        <BroomIcon class={styles.icon} />
+        <ResetIcon class={styles.icon} />
         <span>New game</span>
       </button>
 

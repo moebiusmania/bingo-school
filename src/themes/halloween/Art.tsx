@@ -1,8 +1,5 @@
-/** Hand-made inline SVG artwork used across the app. */
-
-interface ArtProps {
-  class?: string;
-}
+/** Hand-made inline SVG artwork for the Halloween theme. */
+import type { ArtProps } from '../types.ts';
 
 export function Ghost({ class: cls }: ArtProps) {
   return (
@@ -164,26 +161,6 @@ export function BroomIcon({ class: cls }: ArtProps) {
       <path d='M18 24l8 8-4 3-14 9-4-4 9-14z' fill='#e8b04a' />
       <path d='M10 34l6-4M12 38l7-5M8 30l6-5' stroke='#a8741f' stroke-width='1.5' />
       <path d='M17 25l8 8' stroke='#c0392b' stroke-width='3' />
-    </svg>
-  );
-}
-
-export function SpeakerIcon({ class: cls, on }: ArtProps & { on: boolean }) {
-  return (
-    <svg class={cls} viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round'>
-      <path d='M4 9h4l5-4v14l-5-4H4z' fill='currentColor' />
-      {on
-        ? <path d='M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12' />
-        : <path d='M17 9l5 6M22 9l-5 6' />}
-    </svg>
-  );
-}
-
-export function VoiceIcon({ class: cls, on }: ArtProps & { on: boolean }) {
-  return (
-    <svg class={cls} viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round'>
-      <path d='M4 5h16v11H10l-5 4v-4H4z' fill={on ? 'currentColor' : 'none'} />
-      {!on && <path d='M3 3l18 18' />}
     </svg>
   );
 }

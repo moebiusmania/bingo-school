@@ -1,3 +1,4 @@
+import { theme } from '@theme';
 import { CHALLENGE_LEVELS, CHALLENGES, LEVEL_HUES, LEVEL_NAMES } from '../game/challenges.ts';
 import styles from './AnswersPage.module.css';
 
@@ -9,7 +10,7 @@ export function AnswersPage() {
         <a class={styles.back} href={import.meta.env.BASE_URL}>← Back to the board</a>
         <div class={styles.info}>
           <strong>Challenge answers</strong>
-          <span>For the host only. No peeking, little monsters!</span>
+          <span>For the host only. {theme.text.answersWarning}</span>
         </div>
         <button type='button' class={styles.print} onClick={() => print()}>Print</button>
       </header>

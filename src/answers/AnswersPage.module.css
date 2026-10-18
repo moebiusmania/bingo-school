@@ -6,18 +6,18 @@
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: oklch(16% 0.06 300 / 0.92);
-  border-bottom: 2px solid oklch(45% 0.13 305 / 0.6);
+  background: color-mix(in oklch, var(--c-surface) 92%, transparent);
+  border-bottom: 2px solid color-mix(in oklch, var(--c-border) 60%, transparent);
   backdrop-filter: blur(6px);
 }
 
 .back {
-  color: var(--c-purple-light);
+  color: var(--c-text-muted);
   font-weight: 600;
   text-decoration: none;
 
   &:hover {
-    color: var(--c-slime);
+    color: var(--c-accent);
   }
 }
 
@@ -28,15 +28,15 @@
   text-align: center;
 
   & strong {
-    font-family: var(--font-spooky);
+    font-family: var(--font-display);
     font-weight: 400;
     font-size: 26px;
     letter-spacing: 0.04em;
-    color: var(--c-pumpkin);
+    color: var(--c-primary);
   }
 
   & span {
-    color: var(--c-purple-light);
+    color: var(--c-text-muted);
   }
 }
 
@@ -46,9 +46,9 @@
   padding: 12px 20px;
   font-size: 18px;
   font-weight: 700;
-  color: oklch(22% 0.07 40);
-  background: linear-gradient(180deg, oklch(85% 0.15 75), oklch(70% 0.19 52));
-  box-shadow: 0 4px 0 oklch(45% 0.17 42);
+  color: var(--c-on-primary);
+  background: linear-gradient(180deg, var(--c-primary-light), var(--c-primary));
+  box-shadow: 0 4px 0 var(--c-primary-shadow);
   cursor: pointer;
   transition: scale 0.15s ease, filter 0.15s ease;
 
@@ -72,14 +72,14 @@
   border: 2px solid oklch(70% 0.17 var(--hue));
   border-radius: 20px;
   overflow: hidden;
-  background: oklch(20% 0.06 295 / 0.85);
+  background: color-mix(in oklch, var(--c-surface) 85%, transparent);
   break-inside: avoid;
 }
 
 .levelHeading {
   margin: 0;
   padding: 12px 20px;
-  font-family: var(--font-spooky);
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: 28px;
   letter-spacing: 0.04em;
@@ -89,7 +89,7 @@
 
 .levelNumber {
   margin-right: 8px;
-  font-family: var(--font-fun);
+  font-family: var(--font-body);
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -115,13 +115,13 @@
   counter-increment: challenge;
 
   & + .item {
-    border-top: 1px solid oklch(45% 0.1 300 / 0.5);
+    border-top: 1px solid color-mix(in oklch, var(--c-border) 50%, transparent);
   }
 
   &::before {
     content: counter(challenge);
     grid-row: span 2;
-    font-family: var(--font-spooky);
+    font-family: var(--font-display);
     font-size: 30px;
     line-height: 1;
     color: oklch(75% 0.17 var(--hue));
@@ -134,7 +134,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--c-purple-light);
+  color: var(--c-text-muted);
 }
 
 .prompt,
@@ -146,11 +146,11 @@
 }
 
 .answer {
-  color: var(--c-slime);
+  color: var(--c-accent);
 }
 
 .answerLabel {
-  color: var(--c-candle);
+  color: var(--c-highlight);
 }
 
 /* Phones: the host may check answers on their own device */

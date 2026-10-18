@@ -1,3 +1,4 @@
+import { theme } from '@theme';
 import { useMemo } from 'preact/hooks';
 import { BingoCard } from './BingoCard.tsx';
 import { generateCards } from './generateCards.ts';
@@ -43,7 +44,7 @@ export function CardsPage() {
       <header class={styles.toolbar}>
         <a class={styles.back} href={import.meta.env.BASE_URL}>← Back to the board</a>
         <div class={styles.info}>
-          <strong>Spooky Bingo cards</strong>
+          <strong>{theme.meta.name} cards</strong>
           <span>
             {CARD_COUNT} cards · {sheets.length} A4 pages · set #{seed}
           </span>

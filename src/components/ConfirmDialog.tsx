@@ -1,5 +1,5 @@
+import { theme } from '@theme';
 import { useEffect, useRef } from 'preact/hooks';
-import { Ghost } from './Art.tsx';
 import styles from './Dialog.module.css';
 
 interface ConfirmDialogProps {
@@ -7,6 +7,8 @@ interface ConfirmDialogProps {
   onConfirm: () => void;
   onCancel: () => void;
 }
+
+const { Mascot } = theme.art;
 
 export function ConfirmDialog({ open, onConfirm, onCancel }: ConfirmDialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -31,9 +33,9 @@ export function ConfirmDialog({ open, onConfirm, onCancel }: ConfirmDialogProps)
       }}
     >
       <div class={styles.content}>
-        <Ghost class={styles.ghost} />
+        <Mascot class={styles.mascot} />
         <h2 class={styles.heading}>Start a new game?</h2>
-        <p class={styles.text}>All the pumpkins will vanish from the board!</p>
+        <p class={styles.text}>{theme.text.resetWarning}</p>
         <div class={styles.actions}>
           <button type='button' class={`${styles.action} ${styles.cancel}`} onClick={onCancel} autofocus>
             No, keep playing

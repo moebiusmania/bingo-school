@@ -10,7 +10,7 @@
   }
 
   &::backdrop {
-    background: oklch(8% 0.03 290 / 0.75);
+    background: color-mix(in oklch, var(--c-shade) 75%, transparent);
     backdrop-filter: blur(4px);
     animation: fade 0.3s ease;
   }
@@ -22,7 +22,7 @@
   z-index: 30;
   display: grid;
   place-items: center;
-  background: oklch(8% 0.03 290 / 0.7);
+  background: color-mix(in oklch, var(--c-shade) 70%, transparent);
   backdrop-filter: blur(4px);
   animation: fade 0.4s ease;
 
@@ -40,13 +40,13 @@
   padding: 6vh 4vw 4vh;
   min-width: 34vw;
   border-radius: 4vh;
-  background: linear-gradient(180deg, oklch(30% 0.1 300), oklch(18% 0.06 295));
-  border: 3px solid oklch(55% 0.16 305);
-  box-shadow: 0 0 10vh oklch(55% 0.2 305 / 0.6);
+  background: linear-gradient(180deg, var(--c-surface-high), var(--c-surface));
+  border: 3px solid var(--c-glow);
+  box-shadow: 0 0 10vh color-mix(in oklch, var(--c-glow) 60%, transparent);
   text-align: center;
 }
 
-.ghost {
+.mascot {
   position: absolute;
   top: -9vh;
   width: 13vh;
@@ -55,12 +55,12 @@
 
 .heading {
   margin: 0;
-  font-family: var(--font-spooky);
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: 6vh;
   letter-spacing: 0.04em;
-  color: var(--c-pumpkin);
-  text-shadow: 0 0 3vh oklch(75% 0.19 55 / 0.6), 0 0.5vh 0 oklch(30% 0.1 40);
+  color: var(--c-primary);
+  text-shadow: 0 0 3vh color-mix(in oklch, var(--c-primary) 60%, transparent), 0 0.5vh 0 var(--c-on-primary);
 }
 
 .text {
@@ -76,7 +76,7 @@
 }
 
 .action {
-  --shadow: oklch(30% 0.1 300);
+  --shadow: var(--c-secondary-shadow);
   border: none;
   border-radius: 2vh;
   padding: 1.8vh 2vw;
@@ -96,35 +96,35 @@
   }
 
   &:focus-visible {
-    outline: 0.4vh solid var(--c-slime);
+    outline: 0.4vh solid var(--c-accent);
     outline-offset: 0.5vh;
   }
 }
 
 .cancel {
-  --shadow: oklch(28% 0.1 300);
-  background: oklch(48% 0.15 300);
-  color: var(--c-bone);
+  --shadow: var(--c-secondary-shadow);
+  background: var(--c-secondary);
+  color: var(--c-text);
 }
 
 .confirm {
-  --shadow: oklch(45% 0.17 42);
-  background: linear-gradient(180deg, oklch(85% 0.15 75), oklch(70% 0.19 52));
-  color: oklch(22% 0.07 40);
+  --shadow: var(--c-primary-shadow);
+  background: linear-gradient(180deg, var(--c-primary-light), var(--c-primary));
+  color: var(--c-on-primary);
 }
 
 .celebrate {
   padding-top: 4vh;
 }
 
-.pumpkins {
+.dancers {
   display: flex;
   gap: 2vw;
 }
 
 .dancer {
   width: 12vh;
-  filter: drop-shadow(0 0 2vh oklch(80% 0.18 70 / 0.8));
+  filter: drop-shadow(0 0 2vh color-mix(in oklch, var(--c-token-glow) 80%, transparent));
   animation: dance 0.8s ease-in-out infinite alternate;
 
   &:nth-child(2) {

@@ -1,5 +1,6 @@
-.sky,
-.bats,
+/* Fixed full-screen layers. Themes put their own canvases in .background and .foreground */
+.background,
+.foreground,
 .fx {
   position: fixed;
   inset: 0;
@@ -8,11 +9,11 @@
   pointer-events: none;
 }
 
-.sky {
+.background {
   z-index: 0;
 }
 
-.bats {
+.foreground {
   z-index: 5;
 }
 
