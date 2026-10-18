@@ -16,6 +16,7 @@ import { sounds } from './sounds.ts';
 
 export const theme: Theme = {
   meta,
+  storagePrefix: 'spooky-bingo',
   title: ['Spooky', 'Bingo'],
 
   art: {

@@ -4,6 +4,7 @@ import { DEFAULT_THEME, type ThemeMeta, THEMES } from './src/themes/meta.ts';
 
 /** Published on GitHub Pages as a project site, under /bingo-school/. Dev and preview use it too. */
 const BASE = '/bingo-school/';
+const SITE_URL = `https://moebiusmania.github.io${BASE}`;
 
 /** Serves cards/ and answers/ without the trailing slash too (GitHub Pages redirects those itself). */
 const PAGE_URL = new RegExp(`^${BASE}(cards|answers)(\\?.*)?$`);
@@ -26,6 +27,7 @@ const escapeHtml = (s: string) =>
 /** Fills the %THEME_*% placeholders in each page's <head> from the theme's meta.json. */
 function themeHead(meta: ThemeMeta): Plugin {
   const values: Record<string, string> = {
+    THEME_URL: SITE_URL,
     THEME_NAME: meta.name,
     THEME_FAVICON: meta.favicon,
     THEME_COLOR: meta.themeColor,
@@ -49,7 +51,7 @@ function themeHead(meta: ThemeMeta): Plugin {
 }
 
 export default defineConfig(({ mode }) => {
-  // THEME=christmas bun run build (or a THEME line in .env) picks a folder in src/themes/
+  // THEME=xmas bun run build (or a THEME line in .env) picks a folder in src/themes/
   const theme = loadEnv(mode, '.', '').THEME || DEFAULT_THEME;
   const meta = THEMES[theme];
   if (!meta) {

@@ -55,17 +55,18 @@ Then open <http://localhost:5173/bingo-school/>. The dev server is also reachabl
 | --- | --- |
 | `bun install` | Install the dependencies |
 | `bun run dev` | Start the dev server with hot reload |
+| `bun run dev:xmas` | The same, with the Christmas theme |
 | `bun run check` | Type-check the project |
-| `bun run build` | Build the static site into `dist/` |
+| `bun run build` | Build the static site into `dist/` (`THEME=xmas bun run build` for Christmas) |
 | `bun run preview` | Serve the built `dist/` locally |
 
 ### Changing the challenges
 
-All challenge content lives in [`src/themes/halloween/challenges.json`](src/themes/halloween/challenges.json). There are 5 levels with 5 challenges each, and every challenge has a `title`, a `prompt` and an `answer`. In a prompt, `\n` starts a new line. The board and the answers page both read this file, so there is nothing else to update.
+Each theme has its own challenges: [`src/themes/halloween/challenges.json`](src/themes/halloween/challenges.json) and [`src/themes/xmas/challenges.json`](src/themes/xmas/challenges.json). There are 5 levels with 5 challenges each, and every challenge has a `title`, a `prompt` and an `answer`. In a prompt, `\n` starts a new line. The board and the answers page both read this file, so there is nothing else to update.
 
 ### Themes
 
-Everything Halloween about the game (colors, fonts, artwork, sounds, texts, challenges and page titles) lives in [`src/themes/halloween/`](src/themes/halloween/). The game itself doesn't change between themes. To make a new one, copy that folder, register its `meta.json` in [`src/themes/meta.ts`](src/themes/meta.ts), and build with `THEME=<folder> bun run build` (or `bun run dev`). [`src/themes/types.ts`](src/themes/types.ts) documents every slot a theme fills.
+Everything themed about the game (colors, fonts, artwork, sounds, texts, challenges and page titles) lives in a folder under [`src/themes/`](src/themes/): [`halloween/`](src/themes/halloween/) (the default, and the one deployed) and [`xmas/`](src/themes/xmas/). The game itself doesn't change between themes. Pick one with `THEME=xmas bun run build` (or `bun run dev:xmas`). To make a new one, copy a theme folder and register its `meta.json` in [`src/themes/meta.ts`](src/themes/meta.ts). [`src/themes/types.ts`](src/themes/types.ts) documents every slot a theme fills.
 
 ### Deployment
 

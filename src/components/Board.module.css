@@ -60,7 +60,7 @@
 
   & span {
     font-weight: 700;
-    text-shadow: 0 2.5cqh 0 color-mix(in oklch, var(--c-primary-light) 70%, transparent);
+    text-shadow: 0 2.5cqh 0 color-mix(in oklch, var(--c-primary-emboss) 70%, transparent);
   }
 }
 

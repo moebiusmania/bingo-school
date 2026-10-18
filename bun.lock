@@ -7,6 +7,7 @@
       "dependencies": {
         "@fontsource/creepster": "^5.3.0",
         "@fontsource/fredoka": "^5.3.0",
+        "@fontsource/mountains-of-christmas": "^5.3.0",
         "preact": "^11.0.1",
       },
       "devDependencies": {
@@ -62,6 +63,8 @@
     "@fontsource/creepster": ["@fontsource/creepster@5.3.0", "", {}, "sha512-k1Y03cPd2QnoVBygqfYd/y1Byx1Rl3vDLuq3TrmujwaSgFh8hFy2e1ar7/zhillaaCwweLDI9AlvhIBA+VlsWg=="],
 
     "@fontsource/fredoka": ["@fontsource/fredoka@5.3.0", "", {}, "sha512-s2IhjQ50wDnKkkaKmjhtL0rxQg6ITsVusiipM3m7zUwVZZbbCKsscNDkngwp28xVzfIt7neWrkgU1qKqyTycQg=="],
+
+    "@fontsource/mountains-of-christmas": ["@fontsource/mountains-of-christmas@5.3.0", "", {}, "sha512-1MGTUv2jVnkKTFjWqxV1khJZkeN7ozFQJKUynJDbnrciXufx6ffy7sGDAmAvSwlzVn5rVjezkFpage5RQMS82A=="],
 
     "@jridgewell/gen-mapping": ["@jridgewell/gen-mapping@0.3.13", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.5.0", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA=="],
 

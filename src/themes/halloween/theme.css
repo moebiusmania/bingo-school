@@ -28,6 +28,10 @@
   --c-primary-dark: oklch(54% 0.18 42);
   --c-primary-shadow: oklch(44% 0.16 41);
   --c-on-primary: oklch(24% 0.07 40);
+  /* the hard shadow under primary-colored headings */
+  --c-primary-deep: oklch(24% 0.07 40);
+  /* the hard shadow under on-primary text (numbers on drawn cells and the draw orb) */
+  --c-primary-emboss: oklch(91% 0.13 80);
 
   /* Secondary: Challenge and cancel buttons (witchy purple) */
   --c-secondary: oklch(50% 0.19 304);

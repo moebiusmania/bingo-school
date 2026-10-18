@@ -60,7 +60,7 @@
   font-size: 6vh;
   letter-spacing: 0.04em;
   color: var(--c-primary);
-  text-shadow: 0 0 3vh color-mix(in oklch, var(--c-primary) 60%, transparent), 0 0.5vh 0 var(--c-on-primary);
+  text-shadow: 0 0 3vh color-mix(in oklch, var(--c-primary) 60%, transparent), 0 0.5vh 0 var(--c-primary-deep);
 }
 
 .text {

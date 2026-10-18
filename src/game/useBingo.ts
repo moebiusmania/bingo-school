@@ -1,7 +1,8 @@
+import { theme } from '@theme';
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks';
 
 export const TOTAL_NUMBERS = 99;
-const STORAGE_KEY = 'spooky-bingo:drawn';
+const STORAGE_KEY = `${theme.storagePrefix}:drawn`;
 
 function loadDrawn(): number[] {
   try {

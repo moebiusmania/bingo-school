@@ -1,0 +1,47 @@
+{
+  "1": [
+    {"title": "Colors", "prompt": "What color is Santa's suit?", "answer": "Red"},
+    {"title": "Colors", "prompt": "What color is a Christmas tree?", "answer": "Green"},
+    {"title": "Colors", "prompt": "What color is snow?", "answer": "White"},
+    {"title": "Colors", "prompt": "What color is Rudolph's nose?", "answer": "Red"},
+    {"title": "Colors", "prompt": "What color is a candy cane?", "answer": "Red and white"},
+    {"title": "Colors", "prompt": "What color is a gingerbread man?", "answer": "Brown"},
+    {"title": "Colors", "prompt": "What color is the star on the tree?", "answer": "Yellow / Gold"}
+  ],
+  "2": [
+    {"title": "Days of the week", "prompt": "Christmas Eve is on Monday.\nChristmas Day is on…", "answer": "Tuesday"},
+    {"title": "Days of the week", "prompt": "Christmas Eve is on Tuesday.\nChristmas Day is on…", "answer": "Wednesday"},
+    {"title": "Days of the week", "prompt": "Christmas Eve is on Wednesday.\nChristmas Day is on…", "answer": "Thursday"},
+    {"title": "Days of the week", "prompt": "Christmas Eve is on Thursday.\nChristmas Day is on…", "answer": "Friday"},
+    {"title": "Days of the week", "prompt": "Christmas Eve is on Friday.\nChristmas Day is on…", "answer": "Saturday"},
+    {"title": "Days of the week", "prompt": "Christmas Eve is on Saturday.\nChristmas Day is on…", "answer": "Sunday"},
+    {"title": "Days of the week", "prompt": "Christmas Eve is on Sunday.\nChristmas Day is on…", "answer": "Monday"}
+  ],
+  "3": [
+    {"title": "Months and seasons", "prompt": "In which month is Christmas?", "answer": "December"},
+    {"title": "Months and seasons", "prompt": "In which season is Christmas?", "answer": "Winter"},
+    {"title": "Months and seasons", "prompt": "Which month comes after December?", "answer": "January"},
+    {"title": "Months and seasons", "prompt": "Which month comes before December?", "answer": "November"},
+    {"title": "Months and seasons", "prompt": "In which season is August?", "answer": "Summer"},
+    {"title": "Months and seasons", "prompt": "In which season is April?", "answer": "Spring"},
+    {"title": "Months and seasons", "prompt": "In which season is October?", "answer": "Autumn"}
+  ],
+  "4": [
+    {"title": "I've got", "prompt": "Translate into English:\n\"Ho un regalo\"", "answer": "I've got a present"},
+    {"title": "I've got", "prompt": "Translate into English:\n\"Non ho una slitta\"", "answer": "I haven't got a sleigh"},
+    {"title": "I've got", "prompt": "Translate into English:\n\"Ho due renne\"", "answer": "I've got two reindeer"},
+    {"title": "I've got", "prompt": "Translate into English:\n\"Non ho un pupazzo di neve\"", "answer": "I haven't got a snowman"},
+    {"title": "I've got", "prompt": "Translate into English:\n\"Ho una stella\"", "answer": "I've got a star"},
+    {"title": "I've got", "prompt": "Translate into English:\n\"Non ho un albero di Natale\"", "answer": "I haven't got a Christmas tree"},
+    {"title": "I've got", "prompt": "Translate into English:\n\"Ho tre caramelle\"", "answer": "I've got three sweets"}
+  ],
+  "5": [
+    {"title": "Spelling", "prompt": "Spell the word:\nTOY", "answer": "T - O - Y"},
+    {"title": "Spelling", "prompt": "Spell the word:\nHAT", "answer": "H - A - T"},
+    {"title": "Spelling", "prompt": "Spell the word:\nBOX", "answer": "B - O - X"},
+    {"title": "Spelling", "prompt": "Spell the word:\nELF", "answer": "E - L - F"},
+    {"title": "Spelling", "prompt": "Spell the word:\nRED", "answer": "R - E - D"},
+    {"title": "Spelling", "prompt": "Spell the word:\nICE", "answer": "I - C - E"},
+    {"title": "Spelling", "prompt": "Spell the word:\nBAG", "answer": "B - A - G"}
+  ]
+}

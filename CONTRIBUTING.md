@@ -39,14 +39,14 @@ The deploy workflow runs the same check and build, so a pull request that fails 
 - **Preact 11.** Numeric style values don't get an automatic `px`, so pass strings with units, for example `'12px'`. CSS custom properties can go straight into `style` objects.
 - **No audio files.** Sound effects are synthesized with the Web Audio API. Theme-neutral ones go in `src/audio/defaultSounds.ts`, themed ones in the theme's `sounds.ts`.
 - **Themes.** Components in `src/components/` stay theme-neutral: take artwork, text and sounds from `theme` (`import { theme } from '@theme'`), and colors only from the tokens in the theme's `theme.css`. Anything that only makes sense for one theme goes in its folder under `src/themes/`.
-- **Storage.** Anything saved in `localStorage` uses a `spooky-bingo:` key prefix and is wrapped in `try`/`catch`.
+- **Storage.** Anything saved in `localStorage` uses the theme's `storagePrefix` (`spooky-bingo:`, `xmas-bingo:`) and is wrapped in `try`/`catch`.
 - **Match the surrounding code.** Follow the naming, formatting and comment style of the file you're editing. Strings use single quotes.
 
 [`CLAUDE.md`](CLAUDE.md) has a more detailed tour of the architecture: the draw state machine, the rendering layers, audio and the printable cards.
 
 ## Writing challenges
 
-Challenges live in each theme's `challenges.json`, for example [`src/themes/halloween/challenges.json`](src/themes/halloween/challenges.json):
+Challenges live in each theme's `challenges.json`: [`src/themes/halloween/challenges.json`](src/themes/halloween/challenges.json) and [`src/themes/xmas/challenges.json`](src/themes/xmas/challenges.json):
 
 ```json
 { "title": "Spell it!", "prompt": "Spell the word:\nGHOST", "answer": "G - H - O - S - T" }
@@ -58,7 +58,7 @@ Challenges live in each theme's `challenges.json`, for example [`src/themes/hall
 
 Guidelines:
 
-- **Audience.** The players are children aged 7–10 who are learning English. Use simple words and a friendly tone, and keep a Halloween theme where you can.
+- **Audience.** The players are children aged 7–10 who are learning English. Use simple words and a friendly tone, and match the theme of the file (Halloween or Christmas) where you can.
 - **Difficulty.** Each level should be a small step up from the one before. Level 1 is single words: colors, animals, counting. Level 5 asks for short sentences and simple grammar, such as the past tense, comparatives or spotting a mistake.
 - **Answerable out loud.** A child should be able to answer in under a minute, without writing anything down.
 - **Five per level.** The board deals each level's challenges like a shuffled deck. If you add more, keep the number roughly even across levels.

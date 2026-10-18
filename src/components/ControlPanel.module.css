@@ -49,7 +49,7 @@
 
   &:nth-child(2) {
     color: var(--c-primary);
-    text-shadow: 0 0 2cqh color-mix(in oklch, var(--c-primary) 60%, transparent), 0 0.5cqh 0 var(--c-on-primary);
+    text-shadow: 0 0 2cqh color-mix(in oklch, var(--c-primary) 60%, transparent), 0 0.5cqh 0 var(--c-primary-deep);
   }
 }
 

@@ -32,8 +32,8 @@ export function App() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
   const [challengeOpen, setChallengeOpen] = useState(false);
-  const [soundOn, setSoundOn] = useStoredBoolean('spooky-bingo:sound', true);
-  const [voiceOn, setVoiceOn] = useStoredBoolean('spooky-bingo:voice', true);
+  const [soundOn, setSoundOn] = useStoredBoolean(`${theme.storagePrefix}:sound`, true);
+  const [voiceOn, setVoiceOn] = useStoredBoolean(`${theme.storagePrefix}:voice`, true);
 
   const busy = phase !== 'idle' || resetting;
   const finished = game.remaining.length === 0;

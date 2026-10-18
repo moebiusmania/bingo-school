@@ -1,0 +1,12 @@
+{
+  "name": "Xmas Bingo",
+  "favicon": "🎄",
+  "themeColor": "#0e1a2e",
+  "ogImage": "og-image-xmas.jpg",
+  "ogImageAlt": "Xmas Bingo: a bingo board with red-bauble numbers, a snowman and a Christmas tree on a snowy night",
+  "description": {
+    "board": "A Christmas bingo board for the classroom: draw the numbers 1 to 99 with jingling sounds and festive animations, then play English challenges for kids aged 7 to 10.",
+    "cards": "Printable Xmas Bingo cards: 24 unique Christmas tombola cards on A4 sheets, ready to print and cut for the classroom.",
+    "answers": "The answers to every Xmas Bingo English challenge, for the host."
+  }
+}

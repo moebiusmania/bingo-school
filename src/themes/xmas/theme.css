@@ -1,0 +1,109 @@
+/*
+ * Design tokens for the Christmas theme: a snowy midnight-blue night,
+ * red baubles, evergreen buttons and gold tinsel. Same token set as
+ * halloween/theme.css; keep these opaque, color-mix() makes the translucent ones.
+ */
+:root {
+  color-scheme: dark;
+
+  --font-display: 'Mountains of Christmas', 'Georgia', serif;
+  --font-body: 'Fredoka', 'Comic Sans MS', system-ui, sans-serif;
+
+  /* Text */
+  --c-text: oklch(97% 0.01 230);
+  --c-text-muted: oklch(80% 0.06 230);
+  --c-highlight: oklch(93% 0.09 95);
+
+  /* Surfaces (panels, dialogs, toolbars), darkest first */
+  --c-shade: oklch(10% 0.03 255);
+  --c-surface-low: oklch(15% 0.045 255);
+  --c-surface: oklch(21% 0.06 252);
+  --c-surface-high: oklch(31% 0.08 250);
+  --c-border: oklch(50% 0.09 240);
+  --c-glow: oklch(62% 0.13 235);
+
+  /* Primary: drawn numbers, the Draw and confirm buttons (bauble red) */
+  --c-primary-light: oklch(78% 0.13 20);
+  --c-primary: oklch(61% 0.22 26);
+  --c-primary-dark: oklch(46% 0.19 25);
+  --c-primary-shadow: oklch(35% 0.14 24);
+  --c-on-primary: oklch(98% 0.01 60);
+  --c-primary-deep: oklch(28% 0.11 25);
+  --c-primary-emboss: oklch(30% 0.12 25);
+
+  /* Secondary: Challenge and cancel buttons (evergreen) */
+  --c-secondary: oklch(52% 0.13 152);
+  --c-secondary-dark: oklch(41% 0.11 156);
+  --c-secondary-shadow: oklch(28% 0.08 160);
+
+  /* Accent: titles, progress, the latest-number ring, focus outlines (gold) */
+  --c-accent: oklch(87% 0.16 90);
+  --c-accent-mid: oklch(70% 0.15 80);
+  --c-accent-dark: oklch(55% 0.13 72);
+  --c-accent-shadow: oklch(40% 0.1 70);
+  --c-on-accent: oklch(26% 0.06 70);
+
+  /* Glows behind the theme's Mascot and Token artwork */
+  --c-mascot-glow: oklch(95% 0.03 230);
+  --c-token-glow: oklch(88% 0.15 95);
+
+  /* Board cells */
+  --c-cell-text: oklch(88% 0.04 235);
+  --cell-bg: linear-gradient(180deg, oklch(33% 0.07 248), oklch(24% 0.06 252));
+  /* a shiny red bauble */
+  --cell-drawn-bg:
+    radial-gradient(ellipse 26% 20% at 30% 26%, oklch(100% 0 0 / 0.6), transparent 72%),
+    radial-gradient(ellipse 60% 30% at 50% 100%, oklch(25% 0.1 25 / 0.45), transparent 70%),
+    radial-gradient(circle at 40% 35%, oklch(76% 0.17 22), oklch(60% 0.22 26) 50%, oklch(42% 0.17 24));
+
+  /* Large textured backgrounds */
+  --page-bg:
+    radial-gradient(ellipse at 80% 0%, oklch(34% 0.09 245), transparent 55%),
+    radial-gradient(ellipse at 10% 100%, oklch(32% 0.08 165 / 0.45), transparent 50%),
+    linear-gradient(180deg, oklch(20% 0.06 252), oklch(10% 0.03 258));
+  --board-bg:
+    radial-gradient(ellipse at 50% 0%, oklch(44% 0.09 240 / 0.45), transparent 60%),
+    linear-gradient(160deg, oklch(26% 0.06 250 / 0.88), oklch(14% 0.04 255 / 0.92));
+  /* printed cards: a bright star and falling snow on a winter night */
+  --card-bg:
+    radial-gradient(circle at 88% 18%, oklch(97% 0.04 95) 0 3.5mm, oklch(92% 0.08 95 / 0.35) 4mm, transparent 11mm),
+    radial-gradient(circle, #fff9 0 0.35mm, transparent 0.5mm) 0 0 / 9mm 9mm,
+    radial-gradient(circle, #fff6 0 0.25mm, transparent 0.4mm) 4mm 5mm / 11mm 11mm,
+    radial-gradient(ellipse at 50% 0%, oklch(40% 0.09 245), transparent 70%),
+    linear-gradient(170deg, oklch(27% 0.07 250), oklch(15% 0.05 255));
+}
+
+/* Global classes referenced from inline SVG artwork (Art.tsx) */
+.xm-twinkle circle {
+  animation: bauble-twinkle 1.4s ease-in-out infinite alternate;
+
+  &:nth-child(2n) {
+    animation-delay: -0.7s;
+  }
+
+  &:nth-child(3n) {
+    animation-delay: -0.35s;
+  }
+}
+
+.xm-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: star-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes bauble-twinkle {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes star-pulse {
+  50% {
+    transform: scale(1.12) rotate(6deg);
+    filter: brightness(1.2);
+  }
+}

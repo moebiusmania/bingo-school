@@ -1,0 +1,193 @@
+/* ---------- Board ---------- */
+
+/* A bumpy layer of snow resting on the top edge of the frame */
+.snow {
+  position: absolute;
+  top: -1.6cqh;
+  left: 2cqh;
+  right: 2cqh;
+  height: 3.4cqh;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 1.6cqh 1.6cqh 0.8cqh 0.8cqh;
+  background:
+    radial-gradient(circle at 50% 75%, #f4f8ff 0 58%, transparent 61%) 0 0 / 4.4cqh 100% repeat-x,
+    radial-gradient(circle at 50% 85%, #e6effc 0 52%, transparent 55%) 2.2cqh 0.5cqh / 3.6cqh 100% repeat-x,
+    linear-gradient(#f4f8ff, #dbe7f7) bottom / 100% 55% no-repeat;
+  filter: drop-shadow(0 0.4cqh 0.4cqh oklch(20% 0.06 250 / 0.6));
+}
+
+/* Fairy lights hanging just under the snow */
+.lights {
+  position: absolute;
+  top: 1.2cqh;
+  left: 9cqh;
+  right: 9cqh;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+
+  /* the wire */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -0.3cqh 0 auto;
+    height: 1px;
+    background: oklch(30% 0.04 150);
+  }
+}
+
+.bulb {
+  position: relative;
+  width: 1.1cqh;
+  height: 1.6cqh;
+  border-radius: 50% 50% 45% 45% / 40% 40% 60% 60%;
+  background: var(--bulb);
+  box-shadow: 0 0 1.2cqh var(--bulb);
+  animation: twinkle 1.5s ease-in-out infinite alternate;
+
+  /* socket */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -0.4cqh;
+    left: 20%;
+    width: 60%;
+    height: 0.5cqh;
+    border-radius: 0.1cqh;
+    background: oklch(35% 0.04 150);
+  }
+}
+
+.boardHolly {
+  position: absolute;
+  top: -1.8cqh;
+  width: 13cqh;
+  height: 13cqh;
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(0 0.4cqh 0.5cqh oklch(10% 0.03 250 / 0.6));
+
+  &.left {
+    left: -1.4cqh;
+  }
+
+  &.right {
+    right: -1.4cqh;
+    scale: -1 1;
+  }
+}
+
+/* Bauble cap and hook on drawn cells; sized relative to the cell (a size container) */
+.bauble::after {
+  content: '';
+  position: absolute;
+  top: -15cqh;
+  left: 50%;
+  width: 22cqh;
+  height: 21cqh;
+  translate: -50% 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 3cqh, oklch(55% 0.1 75 / 0.5) 3cqh 4cqh) bottom / 100% 11cqh no-repeat,
+    linear-gradient(90deg, oklch(66% 0.13 78), oklch(93% 0.1 95) 40%, oklch(62% 0.13 72)) bottom / 100% 11cqh no-repeat,
+    radial-gradient(circle at 50% 5cqh, transparent 0 2.6cqh, oklch(85% 0.12 90) 2.8cqh 4.2cqh, transparent 4.4cqh);
+  border-radius: 0 0 1cqh 1cqh;
+}
+
+/* ---------- Printed cards ---------- */
+
+.cardHolly {
+  position: absolute;
+  bottom: 0;
+  width: 17mm;
+  height: 17mm;
+  opacity: 0.9;
+
+  &.left {
+    left: 0;
+    scale: 1 -1;
+  }
+
+  &.right {
+    right: 0;
+    scale: -1 -1;
+  }
+}
+
+/* ---------- Draw overlay present ---------- */
+
+.gift {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 4vh oklch(85% 0.15 90 / 0.45));
+}
+
+.shaking {
+  animation: shake 0.22s ease-in-out infinite;
+}
+
+.lid {
+  transform-box: fill-box;
+  transform-origin: 100% 100%;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rattling {
+  animation: rattle 0.18s ease-in-out infinite alternate;
+}
+
+.open {
+  transform: translate(26px, -34px) rotate(16deg);
+}
+
+.sparkle {
+  position: absolute;
+  bottom: 55%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #fff, oklch(90% 0.14 92));
+  box-shadow: 0 0 1.5vh oklch(92% 0.12 92 / 0.9);
+  animation: rise 2.4s ease-in infinite;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes twinkle {
+  from {
+    opacity: 0.35;
+    box-shadow: 0 0 0.3cqh var(--bulb);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  25% {
+    transform: translateX(-0.8vh) rotate(-2deg);
+  }
+  75% {
+    transform: translateX(0.8vh) rotate(2deg);
+  }
+}
+
+@keyframes rattle {
+  to {
+    transform: translateY(-6px) rotate(-2deg);
+  }
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(0.4);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-55vh) translateX(-2vh) scale(1.2);
+    opacity: 0;
+  }
+}

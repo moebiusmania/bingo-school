@@ -18,6 +18,8 @@ export type Art = ComponentType<ArtProps>;
  */
 export interface Theme {
   meta: ThemeMeta;
+  /** Prefix of every localStorage key, so each theme keeps its own game and settings. */
+  storagePrefix: string;
   /** The title in the control panel and on the printed cards, one word per line. */
   title: readonly [string, string];
 

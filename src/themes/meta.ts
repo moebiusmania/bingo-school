@@ -3,6 +3,7 @@
  * <head> of every page, so it must stay free of anything but JSON imports.
  */
 import halloween from './halloween/meta.json' with { type: 'json' };
+import xmas from './xmas/meta.json' with { type: 'json' };
 
 export interface ThemeMeta {
   /** Page title and social share site name, e.g. "Spooky Bingo". */
@@ -17,6 +18,7 @@ export interface ThemeMeta {
   description: { board: string; cards: string; answers: string };
 }
 
-export const THEMES: Record<string, ThemeMeta> = { halloween };
+/** Each key is a folder in src/themes/, picked with the THEME env var. */
+export const THEMES: Record<string, ThemeMeta> = { halloween, xmas };
 
 export const DEFAULT_THEME = 'halloween';
