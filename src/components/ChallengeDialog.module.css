@@ -70,6 +70,11 @@
   text-shadow: 0 0.6vh 0 oklch(100% 0 0 / 0.4);
 }
 
+/* a word instead of a digit, so it needs less size to fit the tile */
+.bingoWord {
+  font-size: 8vh;
+}
+
 .levelName {
   margin-top: -0.5vh;
   font-family: var(--font-display);
@@ -99,7 +104,7 @@
 }
 
 .bingoLabel {
-  margin-top: -1vh;
+  margin-top: 1vh;
   font-family: var(--font-display);
   font-size: 4.5vh;
   line-height: 1.1;

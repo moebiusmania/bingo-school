@@ -3,6 +3,15 @@ import { theme } from '@theme';
 export const CHALLENGE_LEVELS = [1, 2, 3, 4, 5] as const;
 export type ChallengeLevel = (typeof CHALLENGE_LEVELS)[number];
 
+/** How many in a row each level is won with; level 5 is the full bingo. */
+export const LEVEL_LABELS: Record<ChallengeLevel, string> = {
+  1: '2 in a row',
+  2: '3 in a row',
+  3: '4 in a row',
+  4: '5 in a row',
+  5: 'Bingo',
+};
+
 /** What the class shouts for each win; set by the theme. */
 export const LEVEL_NAMES = theme.levelNames;
 

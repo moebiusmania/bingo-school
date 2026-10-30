@@ -6,6 +6,7 @@ import {
   CHALLENGE_LEVELS,
   type ChallengeLevel,
   LEVEL_HUES,
+  LEVEL_LABELS,
   LEVEL_NAMES,
   nextChallenge,
 } from '../game/challenges.ts';
@@ -86,8 +87,18 @@ export function ChallengeDialog({ open, onClose }: ChallengeDialogProps) {
                     style={{ '--hue': LEVEL_HUES[level], '--delay': level }}
                     onClick={() => select(level)}
                   >
-                    <span class={styles.levelLabel}>Level</span>
-                    <span class={styles.levelNumber}>{level}</span>
+                    {isBingo
+                      ? (
+                        <span class={`${styles.levelNumber} ${styles.bingoWord}`}>
+                          {LEVEL_LABELS[level]}
+                        </span>
+                      )
+                      : (
+                        <>
+                          <span class={styles.levelNumber}>{level + 1}</span>
+                          <span class={styles.levelLabel}>in a row</span>
+                        </>
+                      )}
                     <span
                       class={isBingo ? styles.bingoLabel : styles.levelName}
                     >

@@ -3,7 +3,7 @@ import { useRef, useState } from 'preact/hooks';
 import { sound } from '../audio/sound.ts';
 import { burst, burstAt } from '../fx/fx.ts';
 import { dot } from '../fx/shapes.ts';
-import { type Challenge, type ChallengeLevel, LEVEL_HUES } from '../game/challenges.ts';
+import { type Challenge, type ChallengeLevel, LEVEL_HUES, LEVEL_LABELS } from '../game/challenges.ts';
 import dialogStyles from './Dialog.module.css';
 import styles from './ChallengeCard.module.css';
 
@@ -75,7 +75,7 @@ export function ChallengeCard(
       data-result={result ?? undefined}
     >
       <span class={styles.badge}>
-        Level {level} · {levelName}
+        {LEVEL_LABELS[level]} · {levelName}
       </span>
       <h2 class={dialogStyles.heading}>{challenge.title}</h2>
       <p class={styles.prompt}>{challenge.prompt}</p>

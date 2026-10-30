@@ -1,5 +1,5 @@
 import { theme } from '@theme';
-import { CHALLENGE_LEVELS, CHALLENGES, LEVEL_HUES, LEVEL_NAMES } from '../game/challenges.ts';
+import { CHALLENGE_LEVELS, CHALLENGES, LEVEL_HUES, LEVEL_LABELS, LEVEL_NAMES } from '../game/challenges.ts';
 import styles from './AnswersPage.module.css';
 
 /** Host-only cheat sheet: every challenge from challenges.json with its answer. */
@@ -19,7 +19,7 @@ export function AnswersPage() {
         {CHALLENGE_LEVELS.map((level) => (
           <section key={level} class={styles.level} style={{ '--hue': LEVEL_HUES[level] }}>
             <h2 class={styles.levelHeading}>
-              <span class={styles.levelNumber}>Level {level}</span> {LEVEL_NAMES[level]}
+              <span class={styles.levelNumber}>{LEVEL_LABELS[level]}</span> {LEVEL_NAMES[level]}
             </h2>
             <ol class={styles.list}>
               {CHALLENGES[level].map((challenge, i) => (
