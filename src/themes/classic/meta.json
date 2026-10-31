@@ -1,0 +1,13 @@
+{
+  "name": "Classic Bingo",
+  "tagline": "A wise owl and a spinning cage, for any day of the year.",
+  "favicon": "🦉",
+  "themeColor": "#0f2b36",
+  "ogImage": "og-image-classic.jpg",
+  "ogImageAlt": "Classic Bingo: a bingo board with pink numbered balls, an owl and a spinning bingo cage",
+  "description": {
+    "board": "A classic bingo board for the classroom, for any time of year: draw the numbers 1 to 99 with cheerful sounds and animations, then play English challenges for kids aged 7 to 10.",
+    "cards": "Printable Classic Bingo cards: 24 unique tombola cards on A4 sheets, ready to print and cut for the classroom.",
+    "answers": "The answers to every Classic Bingo English challenge, for the host."
+  }
+}

@@ -1,0 +1,73 @@
+/*
+ * Design tokens for the Classic theme, for any time of year: a deep teal
+ * room, pink bingo balls, violet buttons and sunny yellow. Same token set as
+ * halloween/theme.css; keep these opaque, color-mix() makes the translucent ones.
+ */
+:root {
+  color-scheme: dark;
+
+  --font-display: 'Fredoka', 'Comic Sans MS', system-ui, sans-serif;
+  --font-body: 'Fredoka', 'Comic Sans MS', system-ui, sans-serif;
+
+  /* Text */
+  --c-text: oklch(97% 0.01 210);
+  --c-text-muted: oklch(80% 0.05 210);
+  --c-highlight: oklch(93% 0.1 100);
+
+  /* Surfaces (panels, dialogs, toolbars), darkest first */
+  --c-shade: oklch(12% 0.03 225);
+  --c-surface-low: oklch(18% 0.04 222);
+  --c-surface: oklch(24% 0.05 220);
+  --c-surface-high: oklch(33% 0.07 218);
+  --c-border: oklch(52% 0.09 205);
+  --c-glow: oklch(66% 0.12 195);
+
+  /* Primary: drawn numbers, the Draw and confirm buttons (bingo ball pink) */
+  --c-primary-light: oklch(80% 0.13 360);
+  --c-primary: oklch(62% 0.22 3);
+  --c-primary-dark: oklch(50% 0.2 3);
+  --c-primary-shadow: oklch(36% 0.14 3);
+  --c-on-primary: oklch(99% 0.005 360);
+  --c-primary-deep: oklch(28% 0.1 3);
+  --c-primary-emboss: oklch(32% 0.12 3);
+
+  /* Secondary: Challenge and cancel buttons (violet) */
+  --c-secondary: oklch(52% 0.16 295);
+  --c-secondary-dark: oklch(42% 0.15 295);
+  --c-secondary-shadow: oklch(29% 0.1 295);
+
+  /* Accent: titles, progress, the latest-number ring, focus outlines (sunny yellow) */
+  --c-accent: oklch(88% 0.17 95);
+  --c-accent-mid: oklch(72% 0.16 85);
+  --c-accent-dark: oklch(56% 0.13 78);
+  --c-accent-shadow: oklch(40% 0.1 75);
+  --c-on-accent: oklch(26% 0.06 75);
+
+  /* Glows behind the theme's Mascot and Token artwork */
+  --c-mascot-glow: oklch(88% 0.1 95);
+  --c-token-glow: oklch(78% 0.15 3);
+
+  /* Board cells */
+  --c-cell-text: oklch(88% 0.04 205);
+  --cell-bg: linear-gradient(180deg, oklch(35% 0.07 215), oklch(26% 0.055 220));
+  /* a shiny bingo ball with a white ring */
+  --cell-drawn-bg:
+    radial-gradient(ellipse 26% 20% at 30% 24%, oklch(100% 0 0 / 0.55), transparent 72%),
+    radial-gradient(circle closest-side, transparent 76%, oklch(100% 0 0 / 0.75) 79% 85%, transparent 88%),
+    radial-gradient(circle at 40% 35%, oklch(76% 0.17 3), oklch(62% 0.22 3) 50%, oklch(45% 0.18 3));
+
+  /* Large textured backgrounds */
+  --page-bg:
+    radial-gradient(ellipse at 85% 0%, oklch(38% 0.08 200), transparent 55%),
+    radial-gradient(ellipse at 5% 100%, oklch(34% 0.09 295 / 0.45), transparent 50%),
+    linear-gradient(180deg, oklch(24% 0.05 220), oklch(13% 0.03 228));
+  --board-bg:
+    radial-gradient(ellipse at 50% 0%, oklch(46% 0.08 200 / 0.45), transparent 60%),
+    linear-gradient(160deg, oklch(28% 0.055 218 / 0.88), oklch(16% 0.04 225 / 0.92));
+  /* printed cards: confetti dots on deep teal */
+  --card-bg:
+    radial-gradient(circle, oklch(88% 0.17 95 / 0.55) 0 0.5mm, transparent 0.65mm) 0 0 / 13mm 13mm,
+    radial-gradient(circle, oklch(75% 0.17 3 / 0.55) 0 0.45mm, transparent 0.6mm) 6mm 7mm / 15mm 15mm,
+    radial-gradient(ellipse at 50% 0%, oklch(42% 0.08 200), transparent 70%),
+    linear-gradient(170deg, oklch(29% 0.06 215), oklch(17% 0.04 225));
+}

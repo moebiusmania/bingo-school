@@ -2,6 +2,7 @@
  * Registry of the available themes. vite.config.ts reads it to fill the HTML
  * <head> of every page and the home page lists them, so it must stay free of anything but JSON imports.
  */
+import classic from './classic/meta.json' with { type: 'json' };
 import halloween from './halloween/meta.json' with { type: 'json' };
 import xmas from './xmas/meta.json' with { type: 'json' };
 
@@ -21,4 +22,4 @@ export interface ThemeMeta {
 }
 
 /** Each key is a folder in src/themes/ and the theme's URL path, picked with Vite's --mode. */
-export const THEMES: Record<string, ThemeMeta> = { halloween, xmas };
+export const THEMES: Record<string, ThemeMeta> = { classic, halloween, xmas };

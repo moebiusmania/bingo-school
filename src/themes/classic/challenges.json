@@ -1,0 +1,187 @@
+{
+  "1": [
+    {
+      "title": "Colors",
+      "prompt": "What color is the sky?",
+      "answer": "Blue"
+    },
+    {
+      "title": "Colors",
+      "prompt": "What color is grass?",
+      "answer": "Green"
+    },
+    {
+      "title": "Colors",
+      "prompt": "What color is a banana?",
+      "answer": "Yellow"
+    },
+    {
+      "title": "Colors",
+      "prompt": "What color is a strawberry?",
+      "answer": "Red"
+    },
+    {
+      "title": "Colors",
+      "prompt": "What color is milk?",
+      "answer": "White"
+    },
+    {
+      "title": "Colors",
+      "prompt": "What color is chocolate?",
+      "answer": "Brown"
+    },
+    {
+      "title": "Colors",
+      "prompt": "What color is an orange?",
+      "answer": "Orange"
+    }
+  ],
+  "2": [
+    {
+      "title": "Days of the week",
+      "prompt": "Today is Monday.\nTomorrow is…",
+      "answer": "Tuesday"
+    },
+    {
+      "title": "Days of the week",
+      "prompt": "Today is Tuesday.\nTomorrow is…",
+      "answer": "Wednesday"
+    },
+    {
+      "title": "Days of the week",
+      "prompt": "Today is Wednesday.\nTomorrow is…",
+      "answer": "Thursday"
+    },
+    {
+      "title": "Days of the week",
+      "prompt": "Today is Thursday.\nTomorrow is…",
+      "answer": "Friday"
+    },
+    {
+      "title": "Days of the week",
+      "prompt": "Today is Friday.\nTomorrow is…",
+      "answer": "Saturday"
+    },
+    {
+      "title": "Days of the week",
+      "prompt": "Today is Saturday.\nTomorrow is…",
+      "answer": "Sunday"
+    },
+    {
+      "title": "Days of the week",
+      "prompt": "Today is Sunday.\nTomorrow is…",
+      "answer": "Monday"
+    }
+  ],
+  "3": [
+    {
+      "title": "Months and seasons",
+      "prompt": "Which month comes after January?",
+      "answer": "February"
+    },
+    {
+      "title": "Months and seasons",
+      "prompt": "Which month comes after March?",
+      "answer": "April"
+    },
+    {
+      "title": "Months and seasons",
+      "prompt": "Which month comes after June?",
+      "answer": "July"
+    },
+    {
+      "title": "Months and seasons",
+      "prompt": "Which month comes after October?",
+      "answer": "November"
+    },
+    {
+      "title": "Months and seasons",
+      "prompt": "In which season is it very hot?",
+      "answer": "Summer"
+    },
+    {
+      "title": "Months and seasons",
+      "prompt": "Which season comes after winter?",
+      "answer": "Spring"
+    },
+    {
+      "title": "Months and seasons",
+      "prompt": "How many months are there in a year?",
+      "answer": "Twelve"
+    }
+  ],
+  "4": [
+    {
+      "title": "I've got",
+      "prompt": "Translate into English:\n\"Ho un libro\"",
+      "answer": "I've got a book"
+    },
+    {
+      "title": "I've got",
+      "prompt": "Translate into English:\n\"Non ho una penna\"",
+      "answer": "I haven't got a pen"
+    },
+    {
+      "title": "I've got",
+      "prompt": "Translate into English:\n\"Ho due gatti\"",
+      "answer": "I've got two cats"
+    },
+    {
+      "title": "I've got",
+      "prompt": "Translate into English:\n\"Non ho un cane\"",
+      "answer": "I haven't got a dog"
+    },
+    {
+      "title": "I've got",
+      "prompt": "Translate into English:\n\"Ho tre matite\"",
+      "answer": "I've got three pencils"
+    },
+    {
+      "title": "I've got",
+      "prompt": "Translate into English:\n\"Ho una bicicletta rossa\"",
+      "answer": "I've got a red bike"
+    },
+    {
+      "title": "I've got",
+      "prompt": "Translate into English:\n\"Non ho uno zaino\"",
+      "answer": "I haven't got a schoolbag"
+    }
+  ],
+  "5": [
+    {
+      "title": "Spelling",
+      "prompt": "Spell the word:\nDOG",
+      "answer": "D - O - G"
+    },
+    {
+      "title": "Spelling",
+      "prompt": "Spell the word:\nCAT",
+      "answer": "C - A - T"
+    },
+    {
+      "title": "Spelling",
+      "prompt": "Spell the word:\nSUN",
+      "answer": "S - U - N"
+    },
+    {
+      "title": "Spelling",
+      "prompt": "Spell the word:\nPEN",
+      "answer": "P - E - N"
+    },
+    {
+      "title": "Spelling",
+      "prompt": "Spell the word:\nBAG",
+      "answer": "B - A - G"
+    },
+    {
+      "title": "Spelling",
+      "prompt": "Spell the word:\nBUS",
+      "answer": "B - U - S"
+    },
+    {
+      "title": "Spelling",
+      "prompt": "Spell the word:\nEGG",
+      "answer": "E - G - G"
+    }
+  ]
+}

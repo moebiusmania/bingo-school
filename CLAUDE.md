@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-An interactive bingo (tombola) board with swappable themes, each published at its own path, for children aged 7–10, operated by a teacher on a widescreen desktop monitor. Mobile layouts are out of scope, except for the host-only `/answers` page, which must work on a phone. All UI text and code are in English. The project is multi-theme: keep core code and docs theme-neutral. The current themes are "Spooky Bingo" (`halloween`) and "Xmas Bingo" (`xmas`).
+An interactive bingo (tombola) board with swappable themes, each published at its own path, for children aged 7–10, operated by a teacher on a widescreen desktop monitor. Mobile layouts are out of scope, except for the host-only `/answers` page, which must work on a phone. All UI text and code are in English. The project is multi-theme: keep core code and docs theme-neutral. The current themes are "Classic Bingo" (`classic`, for any time of year), "Spooky Bingo" (`halloween`) and "Xmas Bingo" (`xmas`).
 
 Stack: Bun + Vite + Preact (v11) + TypeScript + CSS Modules. Dependencies live in `package.json` (lockfile `bun.lock`). Scripts run Vite and `tsc` on the Bun runtime via `bun --bun`.
 
@@ -30,7 +30,7 @@ There are no tests and no lint task. Verify changes with `bun run check` and `bu
 - `cards/index.html` → `src/cards/main.tsx`: printable player cards.
 - `answers/index.html` → `src/answers/main.tsx`: host-only list of every challenge in `challenges.json` with its answer, printable.
 - The site is published on GitHub Pages under `/bingo-school/`. `vite.config.ts` sets `base` to `/bingo-school/<theme>/` for a theme (dev and preview too) and `/bingo-school/` for the home page. In-app links must use `import.meta.env.BASE_URL`, never a hard-coded `/`.
-- Each page's `<head>` has SEO and social share tags (Open Graph + Twitter) with absolute URLs to `https://moebiusmania.github.io/bingo-school/`. Title, favicon, descriptions, theme color, page URLs (`%THEME_URL%`) and share image are `%THEME_*%` placeholders that the `theme-head` plugin in `vite.config.ts` fills from the theme's `meta.json`. Halloween's share image is `public/og-image.jpg` and Xmas's is `public/og-image-xmas.jpg` (1200×630). Only the home build copies `public/`, so they're served from `/bingo-school/`, not from the theme paths. `/answers` is `noindex`.
+- Each page's `<head>` has SEO and social share tags (Open Graph + Twitter) with absolute URLs to `https://moebiusmania.github.io/bingo-school/`. Title, favicon, descriptions, theme color, page URLs (`%THEME_URL%`) and share image are `%THEME_*%` placeholders that the `theme-head` plugin in `vite.config.ts` fills from the theme's `meta.json`. Share images are 1200×630 JPEGs in `public/`: Halloween's is `og-image.jpg`, Xmas's `og-image-xmas.jpg` and Classic's `og-image-classic.jpg`. Only the home build copies `public/`, so they're served from `/bingo-school/`, not from the theme paths. `/answers` is `noindex`.
 - `.github/workflows/deploy.yml` type-checks, builds and deploys `dist/` to GitHub Pages on every push to `main` (or by hand from the Actions tab). `scripts/build.ts` builds every theme registered in `src/themes/meta.ts`, so a new theme needs no change there.
 - A small plugin in `vite.config.ts` rewrites `/bingo-school/<theme>/cards` and `.../answers` to add the trailing slash in both dev and preview. Every page is listed in `build.rollupOptions.input`.
 - `scripts/dev.ts` runs one Vite server per mode (home and every theme) in middleware mode behind a single HTTP server, routing by URL path, because each theme is its own build.
@@ -43,7 +43,8 @@ Game logic, layout, sizing and motion are theme-neutral. Everything that gives t
 - **Colors**: component CSS uses only the tokens from `theme.css` (`--c-text`, `--c-surface*`, `--c-primary*`, `--c-secondary*`, `--c-accent*`, `--c-highlight`, glows, `--font-display`/`--font-body`, and the textured `--page-bg`, `--board-bg`, `--cell-bg`, `--cell-drawn-bg`, `--card-bg`), plus the per-level `--hue` set inline from `levelHues`. Translucent variants use `color-mix(in oklch, var(--token) N%, transparent)`, so tokens stay opaque. Neutral black/white shadows, the white paper tiles on printed cards and the red of a wrong answer stay literal. Every theme must define every token.
 - **Art slots**: `Mascot` (panel header, reset dialog, cards, "Oops!" stamp), `Token` (board corner, difficulty pips, end-of-game dancers, "Correct!" stamp), the three button icons, `DrawMachine` (gets the draw `phase`), optional `BoardDecor`/`CardDecor`, `cardFillers` for empty card cells. `drawnCellClass` adds theme styling to drawn cells (Halloween's pumpkin stem in `::after`; `::before` is the latest-number ring).
 - `--c-primary-deep` is the hard shadow under primary-colored headings and `--c-primary-emboss` the one under on-primary text (numbers on drawn cells and the draw orb). Halloween has dark text on orange; Xmas has white text on red, which is why they're separate from `--c-on-primary`.
-- Theme-only CSS (Halloween: cobwebs, spider, cauldron, pumpkin stem; Xmas: snow on the frame, fairy lights, holly, gift box, bauble cap) lives in the theme's own `Decor.module.css`, not in `src/components/`.
+- Theme-only CSS (Classic: bunting, bingo cage; Halloween: cobwebs, spider, cauldron, pumpkin stem; Xmas: snow on the frame, fairy lights, holly, gift box, bauble cap) lives in the theme's own `Decor.module.css`, not in `src/components/`.
+- Classic: Mascot owl, Token bingo ball, a spinning bingo cage as `DrawMachine`, party bunting on the board, drifting numbered balls (`BallsCanvas`) and a paper plane crossing now and then (`PaperPlaneCanvas`). Sounds are knocking balls, a marimba and an eraser wipe. It has no `drawnCellClass`: the ball look is all in `--cell-drawn-bg`.
 - Halloween: Mascot ghost, Token jack-o'-lantern, a bubbling cauldron as `DrawMachine`, a night sky with stars, moon and fog (`SkyCanvas`) and bats (`BatsCanvas`). Sounds include the cauldron, a ghostly "woooo" and a witch cackle.
 - Xmas: Mascot snowman, Token Christmas tree, a gift box that rattles and pops its lid, a snowy sky with hills and pines (`WinterSkyCanvas`), and Santa's sleigh crossing now and then (`SleighCanvas`). Sounds are sleigh bells, a glockenspiel and a church bell.
 
@@ -57,7 +58,7 @@ A phase state machine drives each draw: `idle → shuffling → revealing → fl
 - Native `<dialog>`s render above the page's `FxCanvas`, so `ChallengeDialog` mounts its own `FxCanvas` while open.
 
 ### State & persistence
-`src/game/useBingo.ts` holds the drawn numbers, picked with unbiased `crypto.getRandomValues`. Game state and settings persist in `localStorage` under `<theme.storagePrefix>:*` keys (`spooky-bingo:*`, `xmas-bingo:*`), so each theme keeps its own game. All access is wrapped in try/catch.
+`src/game/useBingo.ts` holds the drawn numbers, picked with unbiased `crypto.getRandomValues`. Game state and settings persist in `localStorage` under `<theme.storagePrefix>:*` keys (`classic-bingo:*`, `spooky-bingo:*`, `xmas-bingo:*`), so each theme keeps its own game. All access is wrapped in try/catch.
 
 ### Sizing model (important when touching CSS)
 - `.app` (`App.module.css`) is a size container (`container-type: size`) with height `max(100dvh, 680px)` and `min-width: 1150px`. Below roughly a 13" laptop viewport the page scrolls instead of shrinking.
@@ -68,12 +69,12 @@ A phase state machine drives each draw: `idle → shuffling → revealing → fl
 ### Rendering layers
 Fixed full-screen canvases are stacked by z-index: the theme's `Background` (0) < `.app` (1) < the theme's `Foreground` (5) < `DrawOverlay` (10) < `CompleteDialog` scrim (30) < `FxCanvas` (50). Native `<dialog>`s sit in the top layer.
 - Theme layers use the `background`/`foreground` classes from `components/Layers.module.css` and `runCanvas` from `components/canvas.ts`.
-- Particle bursts go through a tiny event bus, `src/fx/fx.ts` (`burst`, `burstAt`), which `FxCanvas` listens to. A `ParticleShape` is a draw function; `fx/shapes.ts` has the neutral `star` and `dot`, themes add their own (Halloween: `candy`, `pumpkin`; Xmas: `snowflake`, `bauble`). Default colors and shapes come from `theme.particles`.
+- Particle bursts go through a tiny event bus, `src/fx/fx.ts` (`burst`, `burstAt`), which `FxCanvas` listens to. A `ParticleShape` is a draw function; `fx/shapes.ts` has the neutral `star` and `dot`, themes add their own (Classic: `confetti`; Halloween: `candy`, `pumpkin`; Xmas: `snowflake`, `bauble`). Default colors and shapes come from `theme.particles`.
 - Each theme's SVG artwork lives in its `Art.tsx`. Animated SVG parts use global (non-module) classes defined in the theme's `theme.css`, such as Halloween's `jol-glow` and `cd-flames`. Neutral UI icons (speaker, voice) are in `components/Icons.tsx`.
 
 ### Audio
 - `src/audio/synth.ts`: the `Synth` engine. Every sound effect is synthesized with the Web Audio API (no audio files) from `tone()` and `noise()` calls. The `AudioContext` is created lazily on first use. There's a master gain, a compressor and a generated convolution reverb.
-- `src/audio/sound.ts`: the `SoundPack` interface (click, shuffle, reveal, whoosh, land, reset, correct, wrong, fanfare) and the `sound` object the app calls, which runs the theme's recipes. `audio/defaultSounds.ts` holds the theme-neutral ones; a theme overrides what it wants in its `sounds.ts` (both themes override `shuffle`, `reveal` and `reset`).
+- `src/audio/sound.ts`: the `SoundPack` interface (click, shuffle, reveal, whoosh, land, reset, correct, wrong, fanfare) and the `sound` object the app calls, which runs the theme's recipes. `audio/defaultSounds.ts` holds the theme-neutral ones; a theme overrides what it wants in its `sounds.ts` (every theme overrides `shuffle`, `reveal` and `reset`).
 - `duck()` lowers the effects while speech plays. `MASTER_VOLUME` and `DUCKED_VOLUME` were tuned with the user.
 - `src/audio/speech.ts`: Web Speech API number announcer. It prefers a voice named "Daniel", then falls back to the best-ranked English voice. Speech can't be routed through Web Audio, so pitch and rate (from `theme.voice`) are the only way to give it character. The UI only has a voice on/off toggle; the user removed a voice picker.
 

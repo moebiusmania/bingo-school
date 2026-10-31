@@ -1,0 +1,86 @@
+/* ---------- Board ---------- */
+
+/* Pennants hanging from a string along the top of the frame */
+.bunting {
+  position: absolute;
+  top: 0.6cqh;
+  left: 4cqh;
+  right: 4cqh;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+
+  /* the string */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: oklch(90% 0.02 210);
+  }
+}
+
+.flag {
+  width: 1.8cqh;
+  height: 2.2cqh;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* ---------- Printed cards ---------- */
+
+.cardStar {
+  position: absolute;
+  bottom: 1mm;
+  width: 9mm;
+  height: 9mm;
+  opacity: 0.9;
+
+  &.left {
+    left: 1mm;
+  }
+
+  &.right {
+    right: 1mm;
+  }
+}
+
+/* ---------- Draw overlay cage ---------- */
+
+.cage {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 4vh oklch(88% 0.15 95 / 0.35));
+}
+
+.wires,
+.spinning {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.spinning {
+  animation: spin 0.7s linear infinite;
+}
+
+.tumbling {
+  animation: tumble 0.36s ease-in-out infinite alternate;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tumble {
+  from {
+    transform: translate(-7px, 8px);
+  }
+  to {
+    transform: translate(7px, -10px);
+  }
+}
