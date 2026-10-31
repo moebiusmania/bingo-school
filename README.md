@@ -20,9 +20,10 @@ A Halloween-themed bingo (tombola) board for the classroom, made for children ag
 
 | Page | URL | Who it's for |
 | --- | --- | --- |
-| Board | [`/bingo-school/`](https://moebiusmania.github.io/bingo-school/) | The class, on a widescreen display (1150 px wide or more) |
-| Cards | [`/bingo-school/cards`](https://moebiusmania.github.io/bingo-school/cards/) | Print, cut and hand out. Add `?seed=123` for a different set |
-| Answers | [`/bingo-school/answers`](https://moebiusmania.github.io/bingo-school/answers/) | The host only, on any device |
+| Home | [`/bingo-school/`](https://moebiusmania.github.io/bingo-school/) | Anyone: lists the themes |
+| Board | `/bingo-school/<theme>/`: [Halloween](https://moebiusmania.github.io/bingo-school/halloween/), [Christmas](https://moebiusmania.github.io/bingo-school/xmas/) | The class, on a widescreen display (1150 px wide or more) |
+| Cards | `/bingo-school/<theme>/cards` | Print, cut and hand out. Add `?seed=123` for a different set |
+| Answers | `/bingo-school/<theme>/answers` | The host only, on any device |
 
 ## Scope
 
@@ -49,16 +50,15 @@ bun install
 bun run dev
 ```
 
-Then open <http://localhost:5173/bingo-school/>. The dev server is also reachable from other devices on your network, which is handy for checking the answers page on a phone.
+Then open <http://localhost:5173/bingo-school/> and pick a theme. The dev server is also reachable from other devices on your network, which is handy for checking the answers page on a phone.
 
 | Command | What it does |
 | --- | --- |
 | `bun install` | Install the dependencies |
-| `bun run dev` | Start the dev server with hot reload |
-| `bun run dev:xmas` | The same, with the Christmas theme |
+| `bun run dev` | Start the dev server with hot reload, for the home page and every theme |
 | `bun run check` | Type-check the project |
-| `bun run build` | Build the static site into `dist/` (`THEME=xmas bun run build` for Christmas) |
-| `bun run preview` | Serve the built `dist/` locally |
+| `bun run build` | Build the home page and every theme into `dist/` |
+| `bun run preview` | Serve the whole built site locally |
 
 ### Changing the challenges
 
@@ -66,11 +66,11 @@ Each theme has its own challenges: [`src/themes/halloween/challenges.json`](src/
 
 ### Themes
 
-Everything themed about the game (colors, fonts, artwork, sounds, texts, challenges and page titles) lives in a folder under [`src/themes/`](src/themes/): [`halloween/`](src/themes/halloween/) (the default, and the one deployed) and [`xmas/`](src/themes/xmas/). The game itself doesn't change between themes. Pick one with `THEME=xmas bun run build` (or `bun run dev:xmas`). To make a new one, copy a theme folder and register its `meta.json` in [`src/themes/meta.ts`](src/themes/meta.ts). [`src/themes/types.ts`](src/themes/types.ts) documents every slot a theme fills.
+Everything themed about the game (colors, fonts, artwork, sounds, texts, challenges and page titles) lives in a folder under [`src/themes/`](src/themes/): [`halloween/`](src/themes/halloween/) and [`xmas/`](src/themes/xmas/). The game itself doesn't change between themes. Every theme is published at its own path, named after its folder, and listed on the home page. To make a new one, copy a theme folder and register its `meta.json` in [`src/themes/meta.ts`](src/themes/meta.ts): the build, the deployment and the home page pick it up from there. [`src/themes/types.ts`](src/themes/types.ts) documents every slot a theme fills.
 
 ### Deployment
 
-Every push to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). It type-checks, builds and publishes `dist/` to GitHub Pages. The site is served from `/bingo-school/`, the `base` set in `vite.config.ts`.
+Every push to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). It type-checks, builds the home page and every theme, and publishes `dist/` to GitHub Pages. The home page is served from `/bingo-school/` and each theme from `/bingo-school/<theme>/`, the `base` values set in `vite.config.ts`.
 
 ## Contributing
 

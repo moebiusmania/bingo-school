@@ -35,7 +35,7 @@ The deploy workflow runs the same check and build, so a pull request that fails 
 - **English only.** All UI text, code, comments and commit messages are in English.
 - **Desktop first.** The board and the cards are designed for a widescreen desktop monitor, and phone layouts are out of scope for them. Only the answers page needs to work on a phone.
 - **Sizing.** Board and control panel CSS uses container query units (`cqh`/`cqw`) relative to the app, not `vh`/`vw`. Full-screen overlays and dialogs use `vh`/`vw`. Board cells must keep their `data-num` attribute, because the draw animation uses it to find each cell.
-- **Base path.** The site is served from `/bingo-school/`. Write in-app links with `import.meta.env.BASE_URL`, never a hard-coded `/`.
+- **Base path.** Each theme is served from its own path, such as `/bingo-school/xmas/`. Write in-app links with `import.meta.env.BASE_URL`, never a hard-coded `/`.
 - **Preact 11.** Numeric style values don't get an automatic `px`, so pass strings with units, for example `'12px'`. CSS custom properties can go straight into `style` objects.
 - **No audio files.** Sound effects are synthesized with the Web Audio API. Theme-neutral ones go in `src/audio/defaultSounds.ts`, themed ones in the theme's `sounds.ts`.
 - **Themes.** Components in `src/components/` stay theme-neutral: take artwork, text and sounds from `theme` (`import { theme } from '@theme'`), and colors only from the tokens in the theme's `theme.css`. Anything that only makes sense for one theme goes in its folder under `src/themes/`.

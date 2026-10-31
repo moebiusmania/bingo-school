@@ -3,10 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun --bun vite --host",
-    "dev:xmas": "THEME=xmas bun --bun vite --host",
-    "build": "bun --bun vite build",
-    "preview": "bun --bun vite preview",
+    "dev": "bun --bun scripts/dev.ts",
+    "build": "bun --bun scripts/build.ts",
+    "preview": "bun --bun vite preview --mode home",
     "check": "bun --bun tsc --noEmit"
   },
   "dependencies": {

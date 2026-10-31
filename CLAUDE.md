@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-An interactive bingo (tombola) board with swappable themes: "Spooky Bingo" (Halloween, the default and the one deployed) and "Xmas Bingo" (Christmas), for children aged 7–10, operated by a teacher on a widescreen desktop monitor. Mobile layouts are out of scope, except for the host-only `/answers` page, which must work on a phone. All UI text and code are in English.
+An interactive bingo (tombola) board with swappable themes: "Spooky Bingo" (Halloween, the default in dev) and "Xmas Bingo" (Christmas), each published at its own path, for children aged 7–10, operated by a teacher on a widescreen desktop monitor. Mobile layouts are out of scope, except for the host-only `/answers` page, which must work on a phone. All UI text and code are in English.
 
 Stack: Bun + Vite + Preact (v11) + TypeScript + CSS Modules. Dependencies live in `package.json` (lockfile `bun.lock`). Scripts run Vite and `tsc` on the Bun runtime via `bun --bun`.
 
@@ -12,12 +12,11 @@ Stack: Bun + Vite + Preact (v11) + TypeScript + CSS Modules. Dependencies live i
 
 ```sh
 bun install        # install dependencies
-bun run dev        # Vite dev server for the default (Halloween) theme, exposed on the LAN (--host)
-bun run dev:xmas   # the same with the Xmas theme
-bun run build      # production build of the default theme to dist/ (three pages: board, cards, answers)
-THEME=xmas bun run build   # build another theme (a folder in src/themes/); also works as a THEME line in .env
-bun run preview    # serve the built dist/
-bun run check      # type-check src/ and vite.config.ts (tsc --noEmit, see tsconfig.json)
+bun run dev        # dev server (scripts/dev.ts) for the whole site at http://localhost:5173/bingo-school/, exposed on the LAN
+bun run build      # production build of the whole site (scripts/build.ts): home to dist/, each theme to dist/<theme>/
+bun --bun vite build --mode xmas   # rebuild one theme into dist/xmas/
+bun run preview    # serve the whole built dist/
+bun run check      # type-check src/, home/ and vite.config.ts (tsc --noEmit, see tsconfig.json)
 ```
 
 There are no tests and no lint task. Verify changes with `bun run check` and `bun run build`. Do not install headless browsers to check the UI; the user tests in their own browser.
@@ -25,19 +24,22 @@ There are no tests and no lint task. Verify changes with `bun run check` and `bu
 ## Architecture
 
 ### Pages (Vite multi-page)
+- `home/index.html` → `home/main.tsx`: the home page at `/bingo-school/`, listing every theme in `src/themes/meta.ts` with links to its pages. It's a separate build (`--mode home`, with `root: 'home'`) and sits outside every theme, so it has its own colors and doesn't use `@theme`.
+- The pages below exist once per theme, under `/bingo-school/<theme>/`.
 - `index.html` → `src/main.tsx` → `App.tsx`: the board.
 - `cards/index.html` → `src/cards/main.tsx`: printable player cards.
 - `answers/index.html` → `src/answers/main.tsx`: host-only list of every challenge in `challenges.json` with its answer, printable.
-- The site is published on GitHub Pages under `/bingo-school/`. `vite.config.ts` sets that as `base` (dev and preview too, so the local URL is `http://localhost:5173/bingo-school/`) for whichever theme is built. In-app links must use `import.meta.env.BASE_URL`, never a hard-coded `/`.
-- Each page's `<head>` has SEO and social share tags (Open Graph + Twitter) with absolute URLs to `https://moebiusmania.github.io/bingo-school/`. Title, favicon, descriptions, theme color, page URLs (`%THEME_URL%`) and share image are `%THEME_*%` placeholders that the `theme-head` plugin in `vite.config.ts` fills from the theme's `meta.json`. Halloween's share image is `public/og-image.jpg` and Xmas's is `public/og-image-xmas.jpg` (1200×630). `/answers` is `noindex`.
-- `.github/workflows/deploy.yml` type-checks, builds and deploys `dist/` to GitHub Pages on every push to `main` (or by hand from the Actions tab).
-- A small plugin in `vite.config.ts` rewrites `/bingo-school/cards` and `/bingo-school/answers` to add the trailing slash in both dev and preview. Every page is listed in `build.rollupOptions.input`.
+- The site is published on GitHub Pages under `/bingo-school/`. `vite.config.ts` sets `base` to `/bingo-school/<theme>/` for a theme (dev and preview too) and `/bingo-school/` for the home page. In-app links must use `import.meta.env.BASE_URL`, never a hard-coded `/`.
+- Each page's `<head>` has SEO and social share tags (Open Graph + Twitter) with absolute URLs to `https://moebiusmania.github.io/bingo-school/`. Title, favicon, descriptions, theme color, page URLs (`%THEME_URL%`) and share image are `%THEME_*%` placeholders that the `theme-head` plugin in `vite.config.ts` fills from the theme's `meta.json`. Halloween's share image is `public/og-image.jpg` and Xmas's is `public/og-image-xmas.jpg` (1200×630). Only the home build copies `public/`, so they're served from `/bingo-school/`, not from the theme paths. `/answers` is `noindex`.
+- `.github/workflows/deploy.yml` type-checks, builds and deploys `dist/` to GitHub Pages on every push to `main` (or by hand from the Actions tab). `scripts/build.ts` builds every theme registered in `src/themes/meta.ts`, so a new theme needs no change there.
+- A small plugin in `vite.config.ts` rewrites `/bingo-school/<theme>/cards` and `.../answers` to add the trailing slash in both dev and preview. Every page is listed in `build.rollupOptions.input`.
+- `scripts/dev.ts` runs one Vite server per mode (home and every theme) in middleware mode behind a single HTTP server, routing by URL path, because each theme is its own build.
 - `vite.config.ts` imports `src/themes/meta.ts` (JSON imports only) and is type-checked without Node typings (`tsconfig.json` only loads `vite/client`), so don't reference Node types like `IncomingMessage`. Use structural types instead.
 
 ### Themes (`src/themes/`)
 Game logic, layout, sizing and motion are theme-neutral. Everything that gives the game its look, sound and content comes from the active theme.
-- `types.ts` defines the `Theme` contract. Core code imports the active theme with `import { theme } from '@theme'`. That alias is set in `vite.config.ts` from the `THEME` env var (default `halloween`), so a build bundles one theme and the deployed site is the default one. `tsconfig.json` maps `@theme` to Halloween for type-checking, and every theme's `index.ts` is typed as `Theme`.
-- A theme folder has `index.ts` (the `Theme` object, plus side-effect imports of its fonts and `theme.css`), `meta.json` (HTML head; register it in `src/themes/meta.ts`), `theme.css` (design tokens on `:root`, plus any global classes its SVG artwork uses), `challenges.json`, its artwork, background/foreground canvases, extra particle shapes and sound recipes.
+- `types.ts` defines the `Theme` contract. Core code imports the active theme with `import { theme } from '@theme'`. That alias is set in `vite.config.ts` from Vite's `--mode` (the folder name, or `home` for the home page), so each build bundles one theme. `tsconfig.json` maps `@theme` to Halloween for type-checking, and every theme's `index.ts` is typed as `Theme`.
+- A theme folder has `index.ts` (the `Theme` object, plus side-effect imports of its fonts and `theme.css`), `meta.json` (HTML head and home page card; register it in `src/themes/meta.ts`; its folder name is its URL path, and `home` is reserved), `theme.css` (design tokens on `:root`, plus any global classes its SVG artwork uses), `challenges.json`, its artwork, background/foreground canvases, extra particle shapes and sound recipes.
 - **Colors**: component CSS uses only the tokens from `theme.css` (`--c-text`, `--c-surface*`, `--c-primary*`, `--c-secondary*`, `--c-accent*`, `--c-highlight`, glows, `--font-display`/`--font-body`, and the textured `--page-bg`, `--board-bg`, `--cell-bg`, `--cell-drawn-bg`, `--card-bg`), plus the per-level `--hue` set inline from `levelHues`. Translucent variants use `color-mix(in oklch, var(--token) N%, transparent)`, so tokens stay opaque. Neutral black/white shadows, the white paper tiles on printed cards and the red of a wrong answer stay literal. Every theme must define every token.
 - **Art slots**: `Mascot` (panel header, reset dialog, cards, "Oops!" stamp), `Token` (board corner, difficulty pips, end-of-game dancers, "Correct!" stamp), the three button icons, `DrawMachine` (gets the draw `phase`), optional `BoardDecor`/`CardDecor`, `cardFillers` for empty card cells. `drawnCellClass` adds theme styling to drawn cells (Halloween's pumpkin stem in `::after`; `::before` is the latest-number ring).
 - `--c-primary-deep` is the hard shadow under primary-colored headings and `--c-primary-emboss` the one under on-primary text (numbers on drawn cells and the draw orb). Halloween has dark text on orange; Xmas has white text on red, which is why they're separate from `--c-on-primary`.
