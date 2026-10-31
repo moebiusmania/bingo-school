@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-An interactive bingo (tombola) board with swappable themes: "Spooky Bingo" (Halloween, the default in dev) and "Xmas Bingo" (Christmas), each published at its own path, for children aged 7–10, operated by a teacher on a widescreen desktop monitor. Mobile layouts are out of scope, except for the host-only `/answers` page, which must work on a phone. All UI text and code are in English.
+An interactive bingo (tombola) board with swappable themes, each published at its own path, for children aged 7–10, operated by a teacher on a widescreen desktop monitor. Mobile layouts are out of scope, except for the host-only `/answers` page, which must work on a phone. All UI text and code are in English. The project is multi-theme: keep core code and docs theme-neutral. The current themes are "Spooky Bingo" (`halloween`) and "Xmas Bingo" (`xmas`).
 
 Stack: Bun + Vite + Preact (v11) + TypeScript + CSS Modules. Dependencies live in `package.json` (lockfile `bun.lock`). Scripts run Vite and `tsc` on the Bun runtime via `bun --bun`.
 
@@ -44,6 +44,7 @@ Game logic, layout, sizing and motion are theme-neutral. Everything that gives t
 - **Art slots**: `Mascot` (panel header, reset dialog, cards, "Oops!" stamp), `Token` (board corner, difficulty pips, end-of-game dancers, "Correct!" stamp), the three button icons, `DrawMachine` (gets the draw `phase`), optional `BoardDecor`/`CardDecor`, `cardFillers` for empty card cells. `drawnCellClass` adds theme styling to drawn cells (Halloween's pumpkin stem in `::after`; `::before` is the latest-number ring).
 - `--c-primary-deep` is the hard shadow under primary-colored headings and `--c-primary-emboss` the one under on-primary text (numbers on drawn cells and the draw orb). Halloween has dark text on orange; Xmas has white text on red, which is why they're separate from `--c-on-primary`.
 - Theme-only CSS (Halloween: cobwebs, spider, cauldron, pumpkin stem; Xmas: snow on the frame, fairy lights, holly, gift box, bauble cap) lives in the theme's own `Decor.module.css`, not in `src/components/`.
+- Halloween: Mascot ghost, Token jack-o'-lantern, a bubbling cauldron as `DrawMachine`, a night sky with stars, moon and fog (`SkyCanvas`) and bats (`BatsCanvas`). Sounds include the cauldron, a ghostly "woooo" and a witch cackle.
 - Xmas: Mascot snowman, Token Christmas tree, a gift box that rattles and pops its lid, a snowy sky with hills and pines (`WinterSkyCanvas`), and Santa's sleigh crossing now and then (`SleighCanvas`). Sounds are sleigh bells, a glockenspiel and a church bell.
 
 ### Board draw flow (`src/App.tsx`)
@@ -65,14 +66,14 @@ A phase state machine drives each draw: `idle → shuffling → revealing → fl
 - Fixed overlays and dialogs (`DrawOverlay`, `Dialog.module.css`, `ChallengeDialog`) use `vh`/`vw`, because they always cover the viewport.
 
 ### Rendering layers
-Fixed full-screen canvases are stacked by z-index: the theme's `Background` (0; Halloween's `SkyCanvas`: stars/moon/fog) < `.app` (1) < the theme's `Foreground` (5; Halloween's `BatsCanvas`) < `DrawOverlay` (10) < `CompleteDialog` scrim (30) < `FxCanvas` (50). Native `<dialog>`s sit in the top layer.
+Fixed full-screen canvases are stacked by z-index: the theme's `Background` (0) < `.app` (1) < the theme's `Foreground` (5) < `DrawOverlay` (10) < `CompleteDialog` scrim (30) < `FxCanvas` (50). Native `<dialog>`s sit in the top layer.
 - Theme layers use the `background`/`foreground` classes from `components/Layers.module.css` and `runCanvas` from `components/canvas.ts`.
-- Particle bursts go through a tiny event bus, `src/fx/fx.ts` (`burst`, `burstAt`), which `FxCanvas` listens to. A `ParticleShape` is a draw function; `fx/shapes.ts` has the neutral `star` and `dot`, themes add their own (Halloween: `candy`, `pumpkin`). Default colors and shapes come from `theme.particles`.
-- Halloween's SVG artwork lives in `themes/halloween/Art.tsx`. Its animated SVG parts use global (non-module) classes defined in `themes/halloween/theme.css`, such as `jol-glow`, `cd-flames` and `cd-bubble`. Neutral UI icons (speaker, voice) are in `components/Icons.tsx`.
+- Particle bursts go through a tiny event bus, `src/fx/fx.ts` (`burst`, `burstAt`), which `FxCanvas` listens to. A `ParticleShape` is a draw function; `fx/shapes.ts` has the neutral `star` and `dot`, themes add their own (Halloween: `candy`, `pumpkin`; Xmas: `snowflake`, `bauble`). Default colors and shapes come from `theme.particles`.
+- Each theme's SVG artwork lives in its `Art.tsx`. Animated SVG parts use global (non-module) classes defined in the theme's `theme.css`, such as Halloween's `jol-glow` and `cd-flames`. Neutral UI icons (speaker, voice) are in `components/Icons.tsx`.
 
 ### Audio
 - `src/audio/synth.ts`: the `Synth` engine. Every sound effect is synthesized with the Web Audio API (no audio files) from `tone()` and `noise()` calls. The `AudioContext` is created lazily on first use. There's a master gain, a compressor and a generated convolution reverb.
-- `src/audio/sound.ts`: the `SoundPack` interface (click, shuffle, reveal, whoosh, land, reset, correct, wrong, fanfare) and the `sound` object the app calls, which runs the theme's recipes. `audio/defaultSounds.ts` holds the theme-neutral ones; Halloween overrides `shuffle` (cauldron), `reveal` (ghostly "woooo") and `reset` (witch cackle) in `themes/halloween/sounds.ts`.
+- `src/audio/sound.ts`: the `SoundPack` interface (click, shuffle, reveal, whoosh, land, reset, correct, wrong, fanfare) and the `sound` object the app calls, which runs the theme's recipes. `audio/defaultSounds.ts` holds the theme-neutral ones; a theme overrides what it wants in its `sounds.ts` (both themes override `shuffle`, `reveal` and `reset`).
 - `duck()` lowers the effects while speech plays. `MASTER_VOLUME` and `DUCKED_VOLUME` were tuned with the user.
 - `src/audio/speech.ts`: Web Speech API number announcer. It prefers a voice named "Daniel", then falls back to the best-ranked English voice. Speech can't be routed through Web Audio, so pitch and rate (from `theme.voice`) are the only way to give it character. The UI only has a voice on/off toggle; the user removed a voice picker.
 

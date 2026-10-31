@@ -1,4 +1,4 @@
-# Contributing to Spooky Bingo
+# Contributing to Bingo School
 
 Thanks for helping make classroom bingo spookier! This guide explains how to set up the project, what to keep in mind while changing it, and how to send your changes.
 
